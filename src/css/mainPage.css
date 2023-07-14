@@ -1,0 +1,74 @@
+body {
+    overflow: hidden;
+}
+
+.Container {
+    position:relative;
+    
+    display: flex;
+    flex-direction: column;
+
+    top: 0px;
+    left: 43%;
+    
+    width: 33px;
+    height: 120%;
+}
+
+.Item {
+    flex-basis: 100px;
+    background-color: rgb(164, 164, 164);
+    margin-bottom: 2.8rem;
+}
+
+#title {
+    position: absolute;
+
+    color: #00FFF0;
+    font-family: 'Monoton',cursive;
+
+    top: 3%;
+    left: 24%;
+
+    font-size: 5.4rem;
+}
+
+#line-left {
+    position:absolute;
+    
+    width: 17px;
+    height: 100%;
+
+    top: 0px;
+    left: 15px;
+
+    background-color: rgb(164, 164, 164);
+}
+
+#line-right {
+    position:absolute;
+    
+    width: 17px;
+    height: 100%;
+
+    top: 0px;
+    left: 90%;
+
+    background-color: rgb(164, 164, 164);
+}
+
+#mainButton {
+    position: absolute;
+
+    top: 70%;
+    left: 37%;
+
+    color:#FFE500;
+
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: "joti one",cursive;
+
+    border: none;
+    background-color: transparent;
+}
