@@ -1,8 +1,13 @@
 import { createContext,useContext } from "react";
 
+export interface Item {
+    value:number,
+    key:string
+}
+
 interface ChildsTheme_ {
-    childs:React.ReactNode[]
-    setChilds: (element:React.ReactNode[]) => void
+    childs:Item[]
+    setChilds: (element:Item[]) => void
 }
 
 let ChildsTheme = createContext({} as ChildsTheme_)
