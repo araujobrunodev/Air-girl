@@ -2,7 +2,8 @@ import { createContext,useContext } from "react";
 
 export interface Item {
     value:number,
-    key:string
+    key:string,
+    setValue:(val:any) => void
 }
 
 interface ChildsTheme_ {
