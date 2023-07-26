@@ -2,10 +2,11 @@ import { FC } from "react"
 import { useDeviceSize } from "../../globalContext/deviceSize"
 
 interface CreateThemeProp {
-	marginRight: number
+	space: number,
+	key:string
 }
 
-const CreateTheme: FC<CreateThemeProp> = ({ marginRight }) => {
+const CreateTheme: FC<CreateThemeProp> = ({ space }) => {
 	let deviceSize = useDeviceSize().size
 	let top = deviceSize.height >= 900 ? -2 :
 		deviceSize.height >= 800 ? -9 :
@@ -15,11 +16,11 @@ const CreateTheme: FC<CreateThemeProp> = ({ marginRight }) => {
 		<img
 			src="../../../public/theme.png"
 			style={{
-				display: "absolute",
+				display: "relative",
 				width: deviceSize.width,
 				height: "20rem",
 				marginTop: 90 + top + "%",
-				marginLeft: - marginRight + "px"
+				marginLeft: - space + "px"
 			}}
 		/>
 	</>
