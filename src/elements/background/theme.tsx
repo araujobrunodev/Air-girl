@@ -4,16 +4,11 @@ import CreateTheme from "./createTheme"
 import createIdentification from "../identification"
 import { useDeviceSize } from "../../globalContext/deviceSize"
 
-interface RemoveComponent {
-	has: boolean,
-	key: string
-}
-
 const Theme = () => {
 	let deviceSize = useDeviceSize()
 	let childsTheme = useChildsTheme()
-	let [canCreate, setCanCreate] = useState<boolean>(false)
-	let [component, setComponent] = useState(childsTheme.childs.map((item) => {
+	let [canCreate, setCanCreate] = useState<boolean>(true)
+	let [component, setComponent] = useState<any>(childsTheme.childs.map((item) => {
 		return <CreateTheme
 			key={item.key}
 			space={item.value}
@@ -21,25 +16,10 @@ const Theme = () => {
 	}))
 
 	useEffect(() => {
-		let Move = setInterval(() => {
-			if (childsTheme.childs.length != 0) {
-				childsTheme.childs.forEach((item) => {
-					item.setValue(item.value++)
-					if (item.value == 10) {
-						setCanCreate(canCreate = true)
-					}
-				})
-				setComponent(childsTheme.childs.map((item) => {
-					return <CreateTheme
-						key={item.key}
-						space={item.value}
-					/>
-				}))
-			}
-		}, 100 * 1)
+		let Time: number = 300
 
-		let Create = setInterval(() => {
-			if (childsTheme.childs.length < 1 || canCreate) {
+		const CreateT = () => {
+			if (canCreate || childsTheme.childs.length == 0) {
 				childsTheme.setChilds([
 					...childsTheme.childs,
 					{
@@ -50,15 +30,50 @@ const Theme = () => {
 				])
 				setCanCreate(canCreate = false)
 			}
-		}, 100)
+		}
 
-		return () => {
-			let listOrderComponent = [Create, Move]
+		const MoveT = () => {
+			if (childsTheme.childs.length == 0) return
 
-			listOrderComponent.forEach((it) => {
-				clearInterval(it)
+			childsTheme.childs.forEach((item) => {
+				item.setValue(item.value += 1)
+
+				if (item.value == 200) {
+					RemoveT(item.key)
+				}
+				setTimeout(() => {
+					if (childsTheme.childs.length < 5) {
+						setCanCreate(canCreate = true)
+					}
+				},100)
 			})
-		};
+		}
+
+		const RemoveT = (key: string) => {
+			childsTheme.setChilds(
+				childsTheme.childs.filter((itemTheme: Item) =>
+					itemTheme.key != key
+				))
+				
+			console.log(`before remove item ${key}:`, childsTheme.childs)
+		}
+
+		const RenderT = () => {
+			setComponent(childsTheme.childs.map((item) => {
+				return <CreateTheme
+					key={item.key}
+					space={item.value}
+				/>
+			}))
+		}
+
+		let ThemeManager = setInterval(() => {
+			CreateT()
+			MoveT()
+			RenderT()
+		}, Time)
+
+		return () => clearInterval(ThemeManager)
 	}, [childsTheme.childs])
 
 	return (<div
@@ -66,13 +81,13 @@ const Theme = () => {
 		style={{
 			display: "flex",
 			flexDirection: "row",
-			width: deviceSize.size.width * 2 + "px",
+			width: deviceSize.size.width + "px",
 			height: "20rem",
 			margin: "0%",
 			marginTop: "70%",
 			padding: "0%",
 			left: deviceSize.size.width + "px",
-			gap: "0.1pt",
+			gap: "0pt",
 		}}>
 		{
 			childsTheme.childs.length != 0 ?
