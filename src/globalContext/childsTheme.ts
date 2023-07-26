@@ -8,7 +8,7 @@ export interface Item {
 
 interface ChildsTheme_ {
     childs:Item[]
-    setChilds: (element:Item[]) => void
+    setChilds: (element:any) => void
 }
 
 let ChildsTheme = createContext({} as ChildsTheme_)
