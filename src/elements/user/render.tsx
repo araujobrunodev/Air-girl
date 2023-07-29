@@ -1,5 +1,6 @@
 import {FC} from "react"
 import allSprite from "./sprite"
+import "../../css/player.css"
 
 interface RenderPlayerProp {
     sprite:number,
