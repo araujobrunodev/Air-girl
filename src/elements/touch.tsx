@@ -1,4 +1,5 @@
 import { usePress } from "../globalContext/press"
+import "../css/touch.css"
 
 const TouchScreen = () => {
 	let press = usePress()
