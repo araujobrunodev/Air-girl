@@ -3,7 +3,7 @@ import { useStart } from "../../globalContext/start"
 import { useLoading } from "../../globalContext/loading"
 
 const Wait = () => {
-	let start = useStart
+	let start = useStart()
 	let loading = useLoading()
 	let [approves,setApproves] = useState<number>(0)
 	let [message, setMeassage] = useState<string>("")

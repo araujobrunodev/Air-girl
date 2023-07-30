@@ -9,6 +9,6 @@ type start = Start
 
 const CreateStart = createContext({} as start)
 
-const useStart = useContext(CreateStart)
+const useStart = () => useContext(CreateStart)
 
 export { CreateStart,useStart }

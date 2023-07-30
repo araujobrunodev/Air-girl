@@ -6,7 +6,7 @@ import Wait from "../elements/load/wait"
 import "../css/play.css"
 
 const Play = () => {
-    let start = useStart
+    let start = useStart()
 
     return (<>
         {!start.canStart ?
