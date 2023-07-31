@@ -16,7 +16,16 @@ function Game() {
   );
   let [childsTheme, setChildsTheme] = useState([] as Item[])
   let [Press, setPress] = useState<boolean>(false)
-  let [waiting, setWaiting] = useState({} as waitingForTheElement)
+  let [waiting, setWaiting] = useState<waitingForTheElement>({
+    bestScore:false,
+    floor:false,
+    gameOver:false,
+    obstcle:false,
+    pause:false,
+    player:false,
+    score:false,
+    theme:false
+  })
   let [start, setStart] = useState<boolean>(false)
 
   return (<>
