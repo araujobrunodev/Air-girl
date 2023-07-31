@@ -3,6 +3,7 @@ import { Item, useChildsTheme } from "../../globalContext/childsTheme"
 import CreateTheme from "./createTheme"
 import createIdentification from "../identification"
 import { useDeviceSize } from "../../globalContext/deviceSize"
+import { useLoading } from "../../globalContext/loading"
 
 const Theme = () => {
 	let deviceSize = useDeviceSize()
@@ -14,9 +15,26 @@ const Theme = () => {
 			space={item.value}
 		/>
 	}))
+	let loading = useLoading()
 
 	useEffect(() => {
 		let Time: number = 300
+
+		if (typeof deviceSize.size.width == "number" &&
+				typeof canCreate == "boolean" &&
+				!loading.waiting.theme
+			) {
+			loading.setWaiting({
+				bestScore: loading.waiting.bestScore,
+				floor: loading.waiting.floor,
+				gameOver: loading.waiting.gameOver,
+				obstcle: loading.waiting.obstcle,
+				pause: loading.waiting.pause,
+				player: loading.waiting.player,
+				score: loading.waiting.score,
+				theme: true
+			})
+		}
 
 		const CreateT = () => {
 			if (canCreate || childsTheme.childs.length == 0) {
@@ -45,7 +63,7 @@ const Theme = () => {
 					if (childsTheme.childs.length < 5) {
 						setCanCreate(canCreate = true)
 					}
-				},100)
+				}, 100)
 			})
 		}
 
@@ -54,7 +72,7 @@ const Theme = () => {
 				childsTheme.childs.filter((itemTheme: Item) =>
 					itemTheme.key != key
 				))
-				
+
 			console.log(`before remove item ${key}:`, childsTheme.childs)
 		}
 
