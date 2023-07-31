@@ -5,27 +5,29 @@ import { useLoading } from "../../globalContext/loading"
 const Wait = () => {
 	let start = useStart()
 	let loading = useLoading()
-	let [approves,setApproves] = useState<number>(0)
+	let [approves,setApproves] = useState<string>("")
 	let [message, setMeassage] = useState<string>("")
 
 	useEffect(() => {
-
 		if (!loading.waiting.player) {
 			setMeassage("loading for player")
-			setApproves(approves += 1)
-		}
-		if (!loading.waiting.theme){
+			setApproves("loading")
+			return
+		} else if (!loading.waiting.theme){
 			setMeassage("loading for theme")
-			setApproves(approves += 1)
-		}
-
-		if (!loading.waiting.floor) {
+			setApproves("loading")
+			return
+		} else if (!loading.waiting.floor) {
 			setMeassage("loading for floor")
-			setApproves(approves += 1)
+			setApproves("loading")
+			return
+		} else {
+			setApproves("load")
+			setMeassage("")
 		}
 
-		if (approves == 3) return start.setCanStart(true)
-	})
+		if (approves == "load") return start.setCanStart(true)
+	},[loading.waiting])
 
 	return (<>
 		<div
