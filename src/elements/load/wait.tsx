@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react"
-import { useStart } from "../../globalContext/start"
 import { useLoading } from "../../globalContext/loading"
+import { useStart } from "../../globalContext/start"
+import { useEffect, useState } from "react"
+import allSprite from "../user/sprite"
+import "../../css/wait.css"
 
 const Wait = () => {
 	let start = useStart()
@@ -10,15 +12,15 @@ const Wait = () => {
 
 	useEffect(() => {
 		if (!loading.waiting.player) {
-			setMeassage("loading for player")
+			setMeassage("loading player...")
 			setApproves("loading")
 			return
 		} else if (!loading.waiting.theme){
-			setMeassage("loading for theme")
+			setMeassage("loading theme...")
 			setApproves("loading")
 			return
 		} else if (!loading.waiting.floor) {
-			setMeassage("loading for floor")
+			setMeassage("loading floor...")
 			setApproves("loading")
 			return
 		} else {
@@ -33,7 +35,7 @@ const Wait = () => {
 		<div
 			id="divWait"
 		>
-			<div id="iconWait"></div>
+			<img src={allSprite[0].Path} id="iconWait"></img>
 
 			<h1 id="message">{ message }</h1>
 		</div>
