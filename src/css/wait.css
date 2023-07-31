@@ -1,0 +1,70 @@
+@keyframes rotateImg {
+    10% {
+        transform: rotate(25deg);
+    }
+    20% {
+        transform: rotate(50deg);
+    }
+    30% {
+        transform: rotate(75deg);
+    }
+    40% {
+        transform: rotate(100deg);
+    }
+    50% {
+        transform: rotate(125deg);
+    }
+    60% {
+        transform: rotate(150deg);
+    }
+    70% {
+        transform: rotate(175deg);
+    }
+    80% {
+        transform: rotate(200deg);
+    }
+    90% {
+        transform: rotate(225deg);
+    }
+    100% {
+        transform: rotate(250deg);
+    }
+}
+
+#divWait {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background: black;
+}
+
+#iconWait {
+    position: absolute;
+
+    top: 36%;
+    left: 35%;
+
+    width: 30%;
+    height: 20%;
+
+    animation-duration: 2s;
+    animation-name: rotateImg;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#message {
+    position: relative;
+    
+    color: white;
+    
+    text-align: center;
+
+    font-family: 'Jockey One', sans-serif;
+
+    font-size: x-large;
+
+    top: 85%;
+}
