@@ -1,34 +1,32 @@
 import { useLoading } from "../../globalContext/loading"
 import { useStart } from "../../globalContext/start"
 import { useEffect, useState } from "react"
+import callElements from "./callElements"
 import allSprite from "../user/sprite"
 import "../../css/wait.css"
 
 const Wait = () => {
 	let start = useStart()
 	let loading = useLoading()
-	let [approves,setApproves] = useState<string>("")
 	let [message, setMeassage] = useState<string>("")
+
+	callElements()
 
 	useEffect(() => {
 		if (!loading.waiting.player) {
 			setMeassage("loading player...")
-			setApproves("loading")
 			return
 		} else if (!loading.waiting.theme){
 			setMeassage("loading theme...")
-			setApproves("loading")
 			return
 		} else if (!loading.waiting.floor) {
 			setMeassage("loading floor...")
-			setApproves("loading")
 			return
 		} else {
-			setApproves("load")
 			setMeassage("")
+			return start.setCanStart(true)
 		}
 
-		if (approves == "load") return start.setCanStart(true)
 	},[loading.waiting])
 
 	return (<>
