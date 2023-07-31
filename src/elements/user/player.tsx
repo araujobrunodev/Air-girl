@@ -1,89 +1,111 @@
+import { useLoading } from "../../globalContext/loading"
+import { usePress } from "../../globalContext/press"
 import { useState, useEffect } from "react"
 import RenderPlayer from "./render"
-import { usePress } from "../../globalContext/press"
 
 
 const Player = () => {
-    let [RP, setRP] = useState(<></>)
-    let [spriteNumber, setSpriteNumber] = useState<number>(0)
-    const defaultPostion = 20
-    let [position,setPosition] = useState(defaultPostion)
-    let [active,setActive] = useState<string>("")
-    let [repeat,setRepeat] = useState(0)
-    let press = usePress()
+	let press = usePress()
+	let loading = useLoading()
+	const defaultPostion = 20
+	let [RP, setRP] = useState(<></>)
+	let [repeat, setRepeat] = useState(0)
+	let [active, setActive] = useState<string>("")
+	let [position, setPosition] = useState(defaultPostion)
+	let [spriteNumber, setSpriteNumber] = useState<number>(0)
 
-    useEffect(() => {
-        let jumpP = () => {
-            if (!press.event) return;
+	useEffect(() => {
+		if (typeof press.event === "boolean" &&
+				typeof defaultPostion === "number" &&
+				typeof repeat === "number" &&
+				typeof active === "string" &&
+				typeof position === "number" &&
+				typeof spriteNumber === "number" && 
+				!loading.waiting.player
+				) {
+					loading.setWaiting({
+						bestScore: loading.waiting.bestScore,
+						floor: loading.waiting.floor,
+						gameOver: loading.waiting.gameOver,
+						obstcle: loading.waiting.obstcle,
+						pause: loading.waiting.pause,
+						player: true,
+						score: loading.waiting.score,
+						theme: loading.waiting.theme
+					})
+				}
 
-            let fase1 = setTimeout(() => {
-                let defaultS:number = 45
+			let jumpP = () => {
+				if (!press.event) return;
 
-                if (active == "") { 
-                    setSpriteNumber(5)
-                    setRepeat(repeat+= 1)
-                    setPosition(defaultPostion + (defaultS * repeat))
-                    
-                    if (repeat == 2) setActive(active = "1")
-                    
-                    return;
-                }
-                if (active == "1") {
-                    setSpriteNumber(6)
-                    setRepeat(repeat--)
-                    setPosition(defaultPostion + (defaultS/repeat))
+				let fase1 = setTimeout(() => {
+					let defaultS: number = 45
 
-                    if (repeat == 1) setActive("2")
+					if (active == "") {
+						setSpriteNumber(5)
+						setRepeat(repeat += 1)
+						setPosition(defaultPostion + (defaultS * repeat))
 
-                    return;
-                }
-                
-                if (active == "2") {
-                    setRepeat(0)
-                    setActive("")
-                    setSpriteNumber(1)
-                    setPosition(defaultPostion)
-                    press.setEvent(false)
-                    return;
-                }
-            },70)
+						if (repeat == 2) setActive(active = "1")
 
-            return () => clearTimeout(fase1)
-        }
+						return;
+					}
+					if (active == "1") {
+						setSpriteNumber(6)
+						setRepeat(repeat--)
+						setPosition(defaultPostion + (defaultS / repeat))
 
-        let runP = () => {
-            if (press.event) return;
+						if (repeat == 1) setActive("2")
 
-            let fase = setTimeout(() => {
-                if (spriteNumber === 0) return setSpriteNumber(1)
-                if (spriteNumber === 1) return setSpriteNumber(2)
-                if (spriteNumber === 2) return setSpriteNumber(1)
-            }, 150)
+						return;
+					}
 
-            return () => clearTimeout(fase)
-        }
+					if (active == "2") {
+						setRepeat(0)
+						setActive("")
+						setSpriteNumber(1)
+						setPosition(defaultPostion)
+						press.setEvent(false)
+						return;
+					}
+				}, 70)
 
-        let renderP = () => {
-            setRP(
-                <RenderPlayer
-                    sprite={spriteNumber}
-                    posY={-position}
-                />
-            )
-        }
+				return () => clearTimeout(fase1)
+			}
 
-        let Main = setTimeout(() => {
-            runP()
-            jumpP()
-            renderP()
-        }, 40)
+		let runP = () => {
+			if (press.event) return;
 
-        return () => clearTimeout(Main)
-    }, [RP])
+			let fase = setTimeout(() => {
+				if (spriteNumber === 0) return setSpriteNumber(1)
+				if (spriteNumber === 1) return setSpriteNumber(2)
+				if (spriteNumber === 2) return setSpriteNumber(1)
+			}, 150)
 
-    return (<>
-        {RP}
-    </>)
+			return () => clearTimeout(fase)
+		}
+
+		let renderP = () => {
+			setRP(
+				<RenderPlayer
+					sprite={spriteNumber}
+					posY={-position}
+				/>
+			)
+		}
+
+		let Main = setTimeout(() => {
+			runP()
+			jumpP()
+			renderP()
+		}, 40)
+
+		return () => clearTimeout(Main)
+	}, [RP])
+
+	return (<>
+		{RP}
+	</>)
 }
 
 export default Player
