@@ -26,8 +26,8 @@ const Score = () => {
         if (!start.canStart) return;
 
         let time = setTimeout(() => {
-            score.setPits(score.pits++)
-        }, 1000)
+            score.setPits(++score.pits)
+        }, 1000 * 1.5)
 
         return () => clearTimeout(time)
     }, [score.pits])
