@@ -1,11 +1,13 @@
+import Theme from "../background/theme"
 import Floor from "../background/floor"
 import Player from "../user/player"
-import Theme from "../background/theme"
+import Score from "../time/score"
 
 const callElements = () => {
-    Theme()
     Player()
+    Theme()
     Floor()
+    Score()
 }
 
 export default callElements
