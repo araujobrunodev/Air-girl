@@ -22,6 +22,9 @@ const Wait = () => {
 		} else if (!loading.waiting.floor) {
 			setMeassage("loading floor...")
 			return
+		} else if (!loading.waiting.score) {
+			setMeassage("loading score...")
+			return
 		} else {
 			setMeassage("")
 			return start.setCanStart(true)
