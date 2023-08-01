@@ -2,6 +2,7 @@ import { useScore } from "../../globalContext/score"
 import { useStart } from "../../globalContext/start"
 import { useLoading } from "../../globalContext/loading"
 import { useEffect } from "react"
+import "../../css/score.css"
 
 const Score = () => {
     let score = useScore()
@@ -33,7 +34,7 @@ const Score = () => {
     }, [score.pits])
 
     return (<>
-        <p id="score">{
+        <p id="score">Score: {
             score.pits
         }</p>
     </>)
