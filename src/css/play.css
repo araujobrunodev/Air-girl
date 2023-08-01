@@ -2,6 +2,8 @@ body {
     margin: 0px;
 
     background-color: #BBE4ED;
+
+    overflow:  hidden;
 }
 
 #floor {
