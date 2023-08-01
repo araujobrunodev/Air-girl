@@ -1,5 +1,6 @@
-import { FC } from "react"
 import { useDeviceSize } from "../../globalContext/deviceSize"
+import { FC } from "react"
+import "../../css/createTheme.css"
 
 interface CreateThemeProp {
 	space: number,
@@ -15,12 +16,10 @@ const CreateTheme: FC<CreateThemeProp> = ({ space }) => {
 	return <>
 		<img
 			src="../../../theme.png"
+			className="createThemeS"
 			style={{
-				display: "relative",
-				width: deviceSize.width,
-				height: "20rem",
 				marginTop: top + "%",
-				marginLeft: - space + "px"
+				marginLeft: - space + "px",
 			}}
 		/>
 	</>
