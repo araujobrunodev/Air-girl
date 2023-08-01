@@ -1,0 +1,12 @@
+#score {
+    position: absolute;
+
+    top: 1%;
+    left: 65%;
+
+    color: black;
+
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: 'Jockey One', sans-serif;
+}
