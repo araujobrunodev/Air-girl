@@ -1,4 +1,5 @@
 import { useDeviceSize } from "../../globalContext/deviceSize"
+import topAddition from "../topAdd"
 import { FC } from "react"
 import "../../css/createTheme.css"
 
@@ -9,16 +10,14 @@ interface CreateThemeProp {
 
 const CreateTheme: FC<CreateThemeProp> = ({ space }) => {
 	let deviceSize = useDeviceSize().size
-	let top = deviceSize.height >= 900 ? 20 :
-		deviceSize.height >= 800 ? 14 :
-			deviceSize.height >= 700 ? 1 : 0
+	let topAdd = topAddition({size:deviceSize.height,to:"theme"})
 
 	return <>
 		<img
 			src="../../../theme.png"
 			className="createThemeS"
 			style={{
-				marginTop: top + "%",
+				marginTop: topAdd + "%",
 				marginLeft: - space + "px",
 			}}
 		/>
