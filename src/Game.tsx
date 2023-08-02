@@ -1,5 +1,6 @@
 import router from './router'
 import { useState } from 'react'
+import { CreatePause } from './globalContext/pause'
 import { RouterProvider } from "react-router-dom"
 import { CreateScore } from './globalContext/score'
 import { CreateStart } from "./globalContext/start"
@@ -29,6 +30,7 @@ function Game() {
   })
   let [start, setStart] = useState<boolean>(false)
   let [score, setScore] = useState<number>(0)
+  let [pause, setPause] = useState<boolean>(false)
 
   return (<>
     <DeviceSize.Provider value={{ size: deviceSize, setSize: setDeviceSize }}>
@@ -37,7 +39,9 @@ function Game() {
           <CreateLoading.Provider value={{ waiting: waiting, setWaiting: setWaiting }}>
             <CreateStart.Provider value={{ canStart: start, setCanStart: setStart }}>
               <CreateScore.Provider value={{pits:score,setPits:setScore}}>
-                <RouterProvider router={router} />
+                <CreatePause.Provider value={{active:pause,setActive:setPause}}>
+                  <RouterProvider router={router} />
+                </CreatePause.Provider>
               </CreateScore.Provider>
             </CreateStart.Provider>
           </CreateLoading.Provider>
