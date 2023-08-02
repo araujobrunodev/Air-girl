@@ -1,4 +1,5 @@
 import { usePause } from "../../globalContext/pause"
+import "../../css/pauseOrResume.css"
 
 const Halt = () => {
 	let pause = usePause()
