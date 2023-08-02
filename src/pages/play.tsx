@@ -6,6 +6,7 @@ import TouchScreen from "../elements/touch"
 import Score from "../elements/time/score"
 import Wait from "../elements/load/wait"
 import "../css/play.css"
+import Halt from "../elements/pause/halt"
 
 const Play = () => {
     let start = useStart()
@@ -15,6 +16,7 @@ const Play = () => {
             <Wait /> :
             <>
                 <Score/>
+                <Halt/>
                 
                 <Theme />
                 <TouchScreen />
