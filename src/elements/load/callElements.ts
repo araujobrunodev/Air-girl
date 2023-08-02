@@ -8,8 +8,8 @@ const callElements = () => {
     Player()
     Theme()
     Floor()
-    Score()
     Halt()
+    Score()
 }
 
 export default callElements
