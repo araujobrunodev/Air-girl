@@ -1,29 +1,32 @@
-import { useEffect, useState } from "react"
 import { Item, useChildsTheme } from "../../globalContext/childsTheme"
-import CreateTheme from "./createTheme"
-import createIdentification from "../identification"
 import { useDeviceSize } from "../../globalContext/deviceSize"
 import { useLoading } from "../../globalContext/loading"
+import createIdentification from "../identification"
+import { useEffect, useState } from "react"
+import CreateTheme from "./createTheme"
+import "../../css/theme.css"
+import topAddition from "../topAdd"
 
 const Theme = () => {
+	let loading = useLoading()
 	let deviceSize = useDeviceSize()
 	let childsTheme = useChildsTheme()
 	let [canCreate, setCanCreate] = useState<boolean>(true)
+	let topAdd = topAddition({to:"baseTheme",size:deviceSize.size.height})
 	let [component, setComponent] = useState<any>(childsTheme.childs.map((item) => {
 		return <CreateTheme
 			key={item.key}
 			space={item.value}
 		/>
 	}))
-	let loading = useLoading()
 
 	useEffect(() => {
 		let Time: number = 300
 
 		if (typeof deviceSize.size.width == "number" &&
-				typeof canCreate == "boolean" &&
-				!loading.waiting.theme
-			) {
+			typeof canCreate == "boolean" &&
+			!loading.waiting.theme
+		) {
 			loading.setWaiting({
 				bestScore: loading.waiting.bestScore,
 				floor: loading.waiting.floor,
@@ -97,15 +100,7 @@ const Theme = () => {
 	return (<div
 		id="Container"
 		style={{
-			display: "flex",
-			flexDirection: "row",
-			width: deviceSize.size.width + "px",
-			height: "20rem",
-			margin: "0%",
-			marginTop: "70%",
-			padding: "0%",
-			left: deviceSize.size.width + "px",
-			gap: "0pt",
+			top: (240 + topAdd) + "px",
 		}}>
 		{
 			childsTheme.childs.length != 0 ?
