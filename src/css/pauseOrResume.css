@@ -1,0 +1,22 @@
+#pause,#buttonResume {
+    position: absolute;
+
+}
+
+#buttonResume {
+    top: 2%;
+    left: 41%;
+
+    background: transparent;
+    border: none;
+}
+
+#pause {
+    top: -0.3%;
+    left: 39%;
+
+    font-size: 25px;
+    font-weight: bolder;
+
+    font-family: 'Jockey One', sans-serif;
+}
