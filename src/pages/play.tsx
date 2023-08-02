@@ -15,12 +15,12 @@ const Play = () => {
             <Wait /> :
             <>
                 <Score/>
-
-                <Player />
-
+                
                 <Theme />
                 <TouchScreen />
                 <Floor/>
+
+                <Player />
             </>
         }
     </>)
