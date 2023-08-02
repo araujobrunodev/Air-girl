@@ -25,6 +25,9 @@ const Wait = () => {
 		} else if (!loading.waiting.score) {
 			setMeassage("loading score...")
 			return
+		} else if (!loading.waiting.pause) {
+			setMeassage("loading pause...")
+			return
 		} else {
 			setMeassage("")
 			return start.setCanStart(true)
