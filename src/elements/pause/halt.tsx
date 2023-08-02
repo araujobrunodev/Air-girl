@@ -21,7 +21,7 @@ const Halt = () => {
 					theme:loading.waiting.theme
 			})
 			}
-	},[pause.active])
+	},[loading])
 
 	return (<>
 		{!pause.active ?
