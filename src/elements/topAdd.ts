@@ -16,8 +16,13 @@ const topAddition = ({ to, size }: TopAddition): number => {
             else if (size >= 800) result = 70;
             else if (size >= 700) result = 99;
             else result = 0
-            break;
-            
+            break
+        case "theme":
+            if (size >= 900) result = 20;
+            else if (size >= 800) result = 14;
+            else if (size >= 700) result = 1;
+            else result = 0
+            break       
     }
 
     return result
