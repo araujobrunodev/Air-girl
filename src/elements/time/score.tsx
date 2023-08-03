@@ -1,12 +1,14 @@
+import { useLoading } from "../../globalContext/loading"
 import { useScore } from "../../globalContext/score"
 import { useStart } from "../../globalContext/start"
-import { useLoading } from "../../globalContext/loading"
+import { usePause } from "../../globalContext/pause"
 import { useEffect } from "react"
 import "../../css/score.css"
 
 const Score = () => {
     let score = useScore()
     let start = useStart()
+    let pause = usePause()
     let loading = useLoading()
 
     useEffect(() => {
@@ -25,13 +27,14 @@ const Score = () => {
         }
 
         if (!start.canStart) return;
+        if (pause.active) return;
 
         let time = setTimeout(() => {
             score.setPits(++score.pits)
         }, 1000 * 1.5)
 
         return () => clearTimeout(time)
-    }, [score.pits])
+    }, [score.pits,pause.active])
 
     return (<>
         <p id="score">Score: {
