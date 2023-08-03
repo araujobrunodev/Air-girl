@@ -4,15 +4,16 @@ import { useLoading } from "../../globalContext/loading"
 import createIdentification from "../identification"
 import { useEffect, useState } from "react"
 import CreateTheme from "./createTheme"
-import "../../css/theme.css"
 import topAddition from "../topAdd"
+import "../../css/theme.css"
 
 const Theme = () => {
+	const Time: number = 200
 	let loading = useLoading()
 	let deviceSize = useDeviceSize()
 	let childsTheme = useChildsTheme()
 	let [canCreate, setCanCreate] = useState<boolean>(true)
-	let topAdd = topAddition({to:"baseTheme",size:deviceSize.size.height})
+	let topAdd = topAddition({ to: "baseTheme", size: deviceSize.size.height })
 	let [component, setComponent] = useState<any>(childsTheme.childs.map((item) => {
 		return <CreateTheme
 			key={item.key}
@@ -21,8 +22,6 @@ const Theme = () => {
 	}))
 
 	useEffect(() => {
-		let Time: number = 300
-
 		if (typeof deviceSize.size.width == "number" &&
 			typeof canCreate == "boolean" &&
 			!loading.waiting.theme
@@ -59,14 +58,13 @@ const Theme = () => {
 			childsTheme.childs.forEach((item) => {
 				item.setValue(item.value += 1)
 
-				if (item.value == 200) {
+				if (item.value >= 200) {
 					RemoveT(item.key)
 				}
-				setTimeout(() => {
-					if (childsTheme.childs.length < 5) {
-						setCanCreate(canCreate = true)
-					}
-				}, 100)
+
+				if (childsTheme.childs.length < 3) {
+					setCanCreate(canCreate = true)
+				}
 			})
 		}
 
@@ -75,8 +73,6 @@ const Theme = () => {
 				childsTheme.childs.filter((itemTheme: Item) =>
 					itemTheme.key != key
 				))
-
-			console.log(`before remove item ${key}:`, childsTheme.childs)
 		}
 
 		const RenderT = () => {
@@ -89,8 +85,8 @@ const Theme = () => {
 		}
 
 		let ThemeManager = setInterval(() => {
-			CreateT()
 			MoveT()
+			CreateT()
 			RenderT()
 		}, Time)
 
