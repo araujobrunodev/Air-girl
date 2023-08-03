@@ -1,12 +1,14 @@
 import { useDeviceSize } from "../../globalContext/deviceSize"
 import { useLoading } from "../../globalContext/loading"
 import { usePress } from "../../globalContext/press"
+import { usePause } from "../../globalContext/pause"
 import { useState, useEffect } from "react"
 import RenderPlayer from "./render"
 import topAddition from "../topAdd"
 
 
 const Player = () => {
+	let pause = usePause()
 	let press = usePress()
 	let loading = useLoading()
 	let sizeDevice = useDeviceSize()
@@ -39,6 +41,7 @@ const Player = () => {
 		}
 
 		let jumpP = () => {
+			if (pause.active) {return press.setEvent(false)};
 			if (!press.event) return;
 
 			let fase1 = setTimeout(() => {
@@ -78,6 +81,7 @@ const Player = () => {
 
 		let runP = () => {
 			if (press.event) return;
+			if (pause.active) return;
 
 			let fase = setTimeout(() => {
 				if (spriteNumber === 0) return setSpriteNumber(1)
