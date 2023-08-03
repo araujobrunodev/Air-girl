@@ -2,6 +2,7 @@ import { Item, useChildsTheme } from "../../globalContext/childsTheme"
 import { useDeviceSize } from "../../globalContext/deviceSize"
 import { useLoading } from "../../globalContext/loading"
 import createIdentification from "../identification"
+import { usePause } from "../../globalContext/pause"
 import { useEffect, useState } from "react"
 import CreateTheme from "./createTheme"
 import topAddition from "../topAdd"
@@ -10,6 +11,7 @@ import "../../css/theme.css"
 const Theme = () => {
 	const Time: number = 200
 	let loading = useLoading()
+	let pause = usePause()
 	let deviceSize = useDeviceSize()
 	let childsTheme = useChildsTheme()
 	let [canCreate, setCanCreate] = useState<boolean>(true)
@@ -84,6 +86,8 @@ const Theme = () => {
 			}))
 		}
 
+		if (pause.active) return;
+
 		let ThemeManager = setInterval(() => {
 			MoveT()
 			CreateT()
@@ -91,7 +95,7 @@ const Theme = () => {
 		}, Time)
 
 		return () => clearInterval(ThemeManager)
-	}, [childsTheme.childs])
+	}, [childsTheme.childs,pause.active])
 
 	return (<div
 		id="Container"
