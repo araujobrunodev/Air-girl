@@ -32,7 +32,7 @@ const Player = () => {
 				bestScore: loading.waiting.bestScore,
 				floor: loading.waiting.floor,
 				gameOver: loading.waiting.gameOver,
-				obstcle: loading.waiting.obstcle,
+				obstacle: loading.waiting.obstacle,
 				pause: loading.waiting.pause,
 				player: true,
 				score: loading.waiting.score,

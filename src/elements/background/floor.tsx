@@ -10,7 +10,7 @@ const Floor = () => {
                 bestScore:loading.waiting.bestScore,
                 floor:true,
                 gameOver:loading.waiting.gameOver,
-                obstcle:loading.waiting.obstcle,
+                obstacle:loading.waiting.obstacle,
                 pause:loading.waiting.pause,
                 player:loading.waiting.player,
                 score:loading.waiting.score,

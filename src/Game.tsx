@@ -22,7 +22,7 @@ function Game() {
     bestScore:false,
     floor:false,
     gameOver:false,
-    obstcle:false,
+    obstacle:false,
     pause:false,
     player:false,
     score:false,

@@ -14,7 +14,7 @@ const Halt = () => {
 					bestScore:loading.waiting.bestScore,
 					floor:loading.waiting.floor,
 					gameOver:loading.waiting.gameOver,
-					obstcle:loading.waiting.obstcle,
+					obstacle:loading.waiting.obstacle,
 					pause:true,
 					player:loading.waiting.player,
 					score:loading.waiting.score,

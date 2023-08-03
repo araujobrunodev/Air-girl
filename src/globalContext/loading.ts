@@ -6,7 +6,7 @@ interface WaitingForTheElement {
     floor:boolean,
     score:boolean,
     bestScore:boolean,
-    obstcle:boolean,
+    obstacle:boolean,
     pause:boolean,
     gameOver:boolean
 }
