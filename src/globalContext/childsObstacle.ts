@@ -3,7 +3,8 @@ import { createContext, useContext } from "react"
 interface ItemObstacle {
     key:string,
     move:number,
-    sourcePath:string
+    sourcePath:string,
+    setMove:(value:number) => void
 }
 
 export type itemObstacle = ItemObstacle

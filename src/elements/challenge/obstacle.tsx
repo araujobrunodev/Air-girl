@@ -29,9 +29,14 @@ const Obstacle = () => {
 				{
 					sourcePath: fileName,
 					key: identification,
-					move: 0
+					move: 0,
+					setMove:() => {}
 				}
 			] as itemObstacle[])
+		}
+
+		const move = () => {
+
 		}
 
 		const render = () => {
