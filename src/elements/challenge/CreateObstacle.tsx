@@ -1,6 +1,7 @@
 import { useDeviceSize } from "../../globalContext/deviceSize"
 import topAddition from "../topAdd"
 import { FC } from "react"
+import "../../css/obstacle.css"
 
 interface CreateObstacleProp {
     move:number,
