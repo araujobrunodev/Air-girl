@@ -1,0 +1,12 @@
+#base-obstacle {
+    position: absolute;
+    display: flex;
+
+    flex-direction: row;
+
+    top: 69%;
+
+    width: 100%;
+    height: 3.4rem;
+    gap: 0%;
+}
