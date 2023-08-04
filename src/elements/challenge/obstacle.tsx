@@ -3,6 +3,7 @@ import createIdentification from "../identification"
 import CreateObstacle from "./CreateObstacle"
 import findObstacleImgs from "./obstacleImg"
 import { useEffect, useState } from "react"
+import "../../css/baseObstacle.css"
 
 const Obstacle = () => {
 	const time = 100
