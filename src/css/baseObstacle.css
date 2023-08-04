@@ -9,4 +9,6 @@
     width: 100%;
     height: 3.4rem;
     gap: 0%;
+
+    overflow: hidden;
 }
