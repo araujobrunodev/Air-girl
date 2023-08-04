@@ -1,5 +1,3 @@
 .Obstacle {
-    position: relative;
-
-    overflow: hidden;
+    position: absolute;
 }
