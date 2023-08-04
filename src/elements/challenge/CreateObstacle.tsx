@@ -4,11 +4,10 @@ import { FC } from "react"
 
 interface CreateObstacleProp {
     move:number,
-    key:string,
     source:string
 }
 
-const CreateObstacle:FC<CreateObstacleProp> = ({move,key,source}) => {
+const CreateObstacle:FC<CreateObstacleProp> = ({move,source}) => {
     let deviceSize = useDeviceSize().size
     let topAdd = topAddition({
         size:deviceSize.height,
@@ -19,7 +18,6 @@ const CreateObstacle:FC<CreateObstacleProp> = ({move,key,source}) => {
         <img
             className="Obstacle"
             src={source}
-            key={key}
             style={{
                 top:topAdd,
                 left:move
