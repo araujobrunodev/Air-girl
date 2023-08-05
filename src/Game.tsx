@@ -1,20 +1,22 @@
-import router from './router'
-import { useState } from 'react'
+import { CreateLoading, waitingForTheElement } from './globalContext/loading'
+import { CreateObstacle, itemObstacle } from './globalContext/childsObstacle'
+import { ChildsTheme, Item } from './globalContext/childsTheme'
+import { CreatePermision } from './globalContext/permision'
+import { DeviceSize } from './globalContext/deviceSize'
 import { CreatePause } from './globalContext/pause'
-import { RouterProvider } from "react-router-dom"
 import { CreateScore } from './globalContext/score'
 import { CreateStart } from "./globalContext/start"
 import { CreatePress } from "./globalContext/press"
-import { DeviceSize } from './globalContext/deviceSize'
-import { ChildsTheme, Item } from './globalContext/childsTheme'
-import { CreateObstacle, itemObstacle } from './globalContext/childsObstacle'
-import { CreateLoading, waitingForTheElement } from './globalContext/loading'
+import { RouterProvider } from "react-router-dom"
+import { useState } from 'react'
+import router from './router'
 
 function Game() {
   let [score, setScore] = useState<number>(0)
   let [Press, setPress] = useState<boolean>(false)
   let [start, setStart] = useState<boolean>(false)
   let [pause, setPause] = useState<boolean>(false)
+  let [permision, setPermision] = useState<boolean>(false)
   let [childsTheme, setChildsTheme] = useState([] as Item[])
   let [obstacle,setObstacle] = useState([] as itemObstacle[])
   let [deviceSize, setDeviceSize] = useState(
@@ -43,7 +45,9 @@ function Game() {
               <CreateScore.Provider value={{pits:score,setPits:setScore}}>
                 <CreatePause.Provider value={{active:pause,setActive:setPause}}>
                   <CreateObstacle.Provider value={{item:obstacle,setItem:setObstacle}}>
-                    <RouterProvider router={router} />
+                    <CreatePermision.Provider value={{create:permision,setCreate:setPermision}}>
+                      <RouterProvider router={router} />
+                    </CreatePermision.Provider>
                   </CreateObstacle.Provider>
                 </CreatePause.Provider>
               </CreateScore.Provider>
