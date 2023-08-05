@@ -29,14 +29,18 @@ const Obstacle = () => {
 				{
 					sourcePath: fileName,
 					key: identification,
-					move: 0,
+					move: 100,
 					setMove:() => {}
 				}
 			] as itemObstacle[])
 		}
 
 		const move = () => {
+			if (obstacle.item.length == 0) return
 
+			obstacle.item.map((obj) => {
+				obj.setMove(--obj.move)
+			})
 		}
 
 		const render = () => {
@@ -49,12 +53,13 @@ const Obstacle = () => {
 			}))
 		}
 
-		const obstacleManager = setTimeout(() => {
+		const obstacleManager = setInterval(() => {
 			create()
+			move()
 			render()
 		}, time)
 
-		return () => clearTimeout(obstacleManager)
+		return () => clearInterval(obstacleManager)
 	}, [obstacle])
 
 	return (<>
