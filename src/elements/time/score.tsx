@@ -1,3 +1,4 @@
+import { usePermision } from "../../globalContext/permision"
 import { useLoading } from "../../globalContext/loading"
 import { useScore } from "../../globalContext/score"
 import { useStart } from "../../globalContext/start"
@@ -10,6 +11,7 @@ const Score = () => {
     let start = useStart()
     let pause = usePause()
     let loading = useLoading()
+    let permision = usePermision()
 
     useEffect(() => {
         if (typeof score.pits == "number" &&
@@ -28,9 +30,11 @@ const Score = () => {
 
         if (!start.canStart) return;
         if (pause.active) return;
-
+        
         let time = setTimeout(() => {
             score.setPits(++score.pits)
+            
+            if (score.pits % 10 == 0) permision.setCreate(true)  
         }, 1000 * 1.5)
 
         return () => clearTimeout(time)
