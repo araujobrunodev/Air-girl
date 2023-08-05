@@ -18,7 +18,6 @@ const Obstacle = () => {
 	]
 
 	useEffect(() => {
-		console.log("obstacles:", obstacle.item)
 		const create = () => {
 			if (!permision.create) return
 
@@ -32,7 +31,7 @@ const Obstacle = () => {
 					sourcePath: fileName,
 					key: identification,
 					move: 100,
-					setMove:() => {}
+					setMove: () => { }
 				}
 			] as itemObstacle[])
 
@@ -44,7 +43,15 @@ const Obstacle = () => {
 
 			obstacle.item.map((obj) => {
 				obj.setMove(--obj.move)
+
+			if (obj.move <= -30) remove(obj.key)
 			})
+		}
+
+		const remove = (key:string) => {
+			obstacle.setItem(obstacle.item.filter((comp) => {
+				return comp.key != key
+			}))
 		}
 
 		const render = () => {
