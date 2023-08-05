@@ -21,7 +21,7 @@ const CreateObstacle:FC<CreateObstacleProp> = ({move,source}) => {
             src={source}
             style={{
                 top:topAdd,
-                marginLeft:move + "%"
+                left:move + "%"
             }}
         />
     </>)
