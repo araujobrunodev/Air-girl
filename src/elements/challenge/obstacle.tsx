@@ -1,4 +1,5 @@
 import { itemObstacle, useObstacle } from "../../globalContext/childsObstacle"
+import { usePermision } from "../../globalContext/permision"
 import createIdentification from "../identification"
 import CreateObstacle from "./CreateObstacle"
 import findObstacleImgs from "./obstacleImg"
@@ -8,6 +9,7 @@ import "../../css/baseObstacle.css"
 const Obstacle = () => {
 	const time = 100
 	let obstacle = useObstacle()
+	let permision = usePermision()
 	let [Render, setRender] = useState<any>()
 	const obstacleNames = [
 		findObstacleImgs({ name: "traffic cone" }),
@@ -18,7 +20,7 @@ const Obstacle = () => {
 	useEffect(() => {
 		console.log("obstacles:", obstacle.item)
 		const create = () => {
-			if (obstacle.item.length != 0) return
+			if (!permision.create) return
 
 			let randomObstacle = Math.round(Math.random() * (obstacleNames.length - 1))
 			let identification = createIdentification()
@@ -33,6 +35,8 @@ const Obstacle = () => {
 					setMove:() => {}
 				}
 			] as itemObstacle[])
+
+			permision.setCreate(false)
 		}
 
 		const move = () => {
