@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import "../../css/baseObstacle.css"
 
 const Obstacle = () => {
-	const time = 100
+	const time = 36
 	let obstacle = useObstacle()
 	let permision = usePermision()
 	let [Render, setRender] = useState<any>()
@@ -30,7 +30,7 @@ const Obstacle = () => {
 				{
 					sourcePath: fileName,
 					key: identification,
-					move: 100,
+					move: 500,
 					setMove: () => { }
 				}
 			] as itemObstacle[])
@@ -44,7 +44,7 @@ const Obstacle = () => {
 			obstacle.item.map((obj) => {
 				obj.setMove(--obj.move)
 
-			if (obj.move <= -30) remove(obj.key)
+				if (obj.move <= -110) remove(obj.key)
 			})
 		}
 
