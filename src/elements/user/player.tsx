@@ -1,8 +1,10 @@
+import { useObstacle } from "../../globalContext/childsObstacle"
 import { useDeviceSize } from "../../globalContext/deviceSize"
 import { useLoading } from "../../globalContext/loading"
 import { usePress } from "../../globalContext/press"
 import { usePause } from "../../globalContext/pause"
 import { useState, useEffect } from "react"
+import getDistance from "../distance"
 import RenderPlayer from "./render"
 import topAddition from "../topAdd"
 
@@ -12,6 +14,7 @@ const Player = () => {
 	let press = usePress()
 	let loading = useLoading()
 	let sizeDevice = useDeviceSize()
+	let obstacle = useObstacle()
 	const defaultPostion = topAddition({to:"player",size:sizeDevice.size.height})
 	let [RP, setRP] = useState(<></>)
 	let [repeat, setRepeat] = useState(0)
@@ -92,6 +95,26 @@ const Player = () => {
 			return () => clearTimeout(fase)
 		}
 
+		let collision = () => {
+			if (obstacle.item.length == 0) return
+
+			obstacle.item.map((obst) => {
+				let distance = getDistance({
+					size:sizeDevice.size.height,
+					obstacle:obst,
+					player: {
+						x:13,
+						y:position
+					}
+				})
+
+				if (distance.x == -45 &&
+					distance.y >= 0 && distance.y < 75) {
+					console.log("collision detected")
+				}
+			})
+		}
+
 		let renderP = () => {
 			setRP(
 				<RenderPlayer
@@ -104,8 +127,9 @@ const Player = () => {
 		let Main = setTimeout(() => {
 			runP()
 			jumpP()
+			collision()
 			renderP()
-		}, 40)
+		}, 30)
 
 		return () => clearTimeout(Main)
 	}, [RP])
