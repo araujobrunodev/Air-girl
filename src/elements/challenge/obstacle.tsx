@@ -1,7 +1,7 @@
 import { itemObstacle, useObstacle } from "../../globalContext/childsObstacle"
 import { usePermision } from "../../globalContext/permision"
-import createIdentification from "../identification"
 import { useLoading } from "../../globalContext/loading"
+import createIdentification from "../identification"
 import { usePause } from "../../globalContext/pause"
 import CreateObstacle from "./CreateObstacle"
 import findObstacleImgs from "./obstacleImg"
@@ -85,13 +85,14 @@ const Obstacle = () => {
 		}
 
 		const obstacleManager = setInterval(() => {
+			if (pause.active) return
 			create()
 			move()
 			render()
 		}, time)
 
 		return () => clearInterval(obstacleManager)
-	}, [obstacle])
+	}, [obstacle,pause.active])
 
 	return (<>
 		<div id="base-obstacle">
