@@ -1,6 +1,8 @@
 import { itemObstacle, useObstacle } from "../../globalContext/childsObstacle"
 import { usePermision } from "../../globalContext/permision"
 import createIdentification from "../identification"
+import { useLoading } from "../../globalContext/loading"
+import { usePause } from "../../globalContext/pause"
 import CreateObstacle from "./CreateObstacle"
 import findObstacleImgs from "./obstacleImg"
 import { useEffect, useState } from "react"
@@ -8,6 +10,8 @@ import "../../css/baseObstacle.css"
 
 const Obstacle = () => {
 	const time = 36
+	let pause = usePause()
+	let loading = useLoading()
 	let obstacle = useObstacle()
 	let permision = usePermision()
 	let [Render, setRender] = useState<any>()
@@ -18,6 +22,22 @@ const Obstacle = () => {
 	]
 
 	useEffect(() => {
+		if (typeof time === "number" &&
+			typeof permision.create === "boolean" &&
+			typeof pause.active === "boolean" &&
+			!loading.waiting.obstacle) {
+				loading.setWaiting({
+					bestScore:loading.waiting.bestScore,
+					floor:loading.waiting.floor,
+					gameOver:loading.waiting.gameOver,
+					obstacle:true,
+					pause:loading.waiting.pause,
+					player:loading.waiting.player,
+					score:loading.waiting.score,
+					theme:loading.waiting.theme,
+				})
+		}
+
 		const create = () => {
 			if (!permision.create) return
 
@@ -48,7 +68,7 @@ const Obstacle = () => {
 			})
 		}
 
-		const remove = (key:string) => {
+		const remove = (key: string) => {
 			obstacle.setItem(obstacle.item.filter((comp) => {
 				return comp.key != key
 			}))
