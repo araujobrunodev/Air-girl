@@ -28,6 +28,9 @@ const Wait = () => {
 		} else if (!loading.waiting.pause) {
 			setMeassage("loading pause...")
 			return
+		} else if (!loading.waiting.obstacle) {
+			setMeassage("loading obstacle...")
+			return
 		} else {
 			setMeassage("")
 			return start.setCanStart(true)
