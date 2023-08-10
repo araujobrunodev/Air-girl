@@ -1,9 +1,16 @@
 import { createContext, useContext } from "react"
 
+interface ObstacleSize {
+    width:number,
+    height:number
+}
+
 interface ItemObstacle {
     key:string,
     move:number,
     sourcePath:string,
+    size:ObstacleSize,
+    setSize:(obstacleSize:ObstacleSize) => void
     setMove:(value:number) => void
 }
 
