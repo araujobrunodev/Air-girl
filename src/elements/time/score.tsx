@@ -34,7 +34,7 @@ const Score = () => {
         let time = setTimeout(() => {
             score.setPits(++score.pits)
             
-            if (score.pits % 10 == 0) permision.setCreate(true)  
+            if (score.pits >= 6 && score.pits % 1 == 0) permision.setCreate(true)  
         }, 1000 * 1.5)
 
         return () => clearTimeout(time)
