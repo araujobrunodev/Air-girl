@@ -3,6 +3,7 @@ import { usePermision } from "../../globalContext/permision"
 import { useLoading } from "../../globalContext/loading"
 import createIdentification from "../identification"
 import { usePause } from "../../globalContext/pause"
+import { useScore } from "../../globalContext/score"
 import CreateObstacle from "./CreateObstacle"
 import findObstacleImgs from "./obstacleImg"
 import { useEffect, useState } from "react"
@@ -11,12 +12,14 @@ import "../../css/baseObstacle.css"
 
 const Obstacle = () => {
 	const time = 26
+	const speedLimit = 45
 	let pause = usePause()
+	let score = useScore()
 	let loading = useLoading()
 	let obstacle = useObstacle()
 	let permision = usePermision()
-	let [speedMove, setSpeedMove] = useState<number>(5)
 	let [Render, setRender] = useState<any>()
+	let [speedMove, setSpeedMove] = useState<number>(16)
 	const obstacleNames = [
 		findObstacleImgs({ name: "traffic cone" }),
 		// findObstacleImgs({ name: "car" }),
@@ -44,6 +47,8 @@ const Obstacle = () => {
 				theme: loading.waiting.theme,
 			})
 		}
+
+		if (score.pits % 10 == 0 && speedMove != speedLimit) setSpeedMove(++speedMove)
 
 		const create = () => {
 			if (!permision.create) return
@@ -76,6 +81,7 @@ const Obstacle = () => {
 
 				if (obj.move <= -110) remove(obj.key)
 			})
+			console.log(speedMove)
 		}
 
 		const remove = (key: string) => {
@@ -102,7 +108,7 @@ const Obstacle = () => {
 		}, time)
 
 		return () => clearInterval(obstacleManager)
-	}, [obstacle,pause.active])
+	}, [obstacle, pause.active])
 
 	return (<>
 		<div id="base-obstacle">
