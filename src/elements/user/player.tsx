@@ -15,7 +15,7 @@ const Player = () => {
 	let loading = useLoading()
 	let sizeDevice = useDeviceSize()
 	let obstacle = useObstacle()
-	const defaultPostion = topAddition({to:"player",size:sizeDevice.size.height})
+	const defaultPostion = topAddition({ to: "player", size: sizeDevice.size.height })
 	let [RP, setRP] = useState(<></>)
 	let [repeat, setRepeat] = useState(0)
 	let [active, setActive] = useState<string>("")
@@ -44,7 +44,7 @@ const Player = () => {
 		}
 
 		let jumpP = () => {
-			if (pause.active) {return press.setEvent(false)};
+			if (pause.active) { return press.setEvent(false) };
 			if (!press.event) return;
 
 			let fase1 = setTimeout(() => {
@@ -98,22 +98,26 @@ const Player = () => {
 		let collision = () => {
 			if (obstacle.item.length == 0) return
 
+			let obstaclePosY = topAddition({ size: sizeDevice.size.height, to: "obstacle" })
+
 			obstacle.item.map((obst) => {
 				let distance = getDistance({
-					size:sizeDevice.size.height,
-					obstacle:obst,
+					size: sizeDevice.size.height,
+					obstacle: obst,
 					player: {
-						x:13,
-						y:position
+						x: 13,
+						y: position
 					}
 				})
 
-				if (distance.x == -45 &&
-					distance.y >= 0 && distance.y < 75) {
+				if (distance.x > obst.move && distance.x < obst.size.width &&
+					distance.y < obst.size.height && distance.y > obstaclePosY) {
 					console.log("collision detected")
 				}
 			})
 		}
+
+		const hitbox = setInterval(() => collision(), 25)
 
 		let renderP = () => {
 			setRP(
@@ -127,11 +131,14 @@ const Player = () => {
 		let Main = setTimeout(() => {
 			runP()
 			jumpP()
-			collision()
 			renderP()
 		}, 30)
 
-		return () => clearTimeout(Main)
+		return () => {
+			let list = [Main, hitbox]
+
+			list.map((it) => clearInterval(it))
+		}
 	}, [RP])
 
 	return (<>
