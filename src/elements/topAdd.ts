@@ -33,6 +33,9 @@ const topAddition = ({ to, size }: TopAddition): number => {
             else if (size >= 800) result = -3;
             else if (size >= 700) result = 7;
             break
+        case "obstacle":
+            result = -1
+            break
     }
 
     return result
