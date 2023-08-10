@@ -6,19 +6,26 @@ import { usePause } from "../../globalContext/pause"
 import CreateObstacle from "./CreateObstacle"
 import findObstacleImgs from "./obstacleImg"
 import { useEffect, useState } from "react"
+import obstacleSize from "./obstacleSize "
 import "../../css/baseObstacle.css"
 
 const Obstacle = () => {
-	const time = 36
+	const time = 26
 	let pause = usePause()
 	let loading = useLoading()
 	let obstacle = useObstacle()
 	let permision = usePermision()
+	let [speedMove, setSpeedMove] = useState<number>(5)
 	let [Render, setRender] = useState<any>()
 	const obstacleNames = [
 		findObstacleImgs({ name: "traffic cone" }),
-		findObstacleImgs({ name: "car" }),
-		findObstacleImgs({ name: "rock" })
+		// findObstacleImgs({ name: "car" }),
+		// findObstacleImgs({ name: "rock" })
+	]
+	const obstaclesSize = [
+		obstacleSize({ name: "traffic cone" }),
+		obstacleSize({ name: "car" }),
+		obstacleSize({ name: "rock" })
 	]
 
 	useEffect(() => {
@@ -26,16 +33,16 @@ const Obstacle = () => {
 			typeof permision.create === "boolean" &&
 			typeof pause.active === "boolean" &&
 			!loading.waiting.obstacle) {
-				loading.setWaiting({
-					bestScore:loading.waiting.bestScore,
-					floor:loading.waiting.floor,
-					gameOver:loading.waiting.gameOver,
-					obstacle:true,
-					pause:loading.waiting.pause,
-					player:loading.waiting.player,
-					score:loading.waiting.score,
-					theme:loading.waiting.theme,
-				})
+			loading.setWaiting({
+				bestScore: loading.waiting.bestScore,
+				floor: loading.waiting.floor,
+				gameOver: loading.waiting.gameOver,
+				obstacle: true,
+				pause: loading.waiting.pause,
+				player: loading.waiting.player,
+				score: loading.waiting.score,
+				theme: loading.waiting.theme,
+			})
 		}
 
 		const create = () => {
@@ -44,6 +51,7 @@ const Obstacle = () => {
 			let randomObstacle = Math.round(Math.random() * (obstacleNames.length - 1))
 			let identification = createIdentification()
 			let fileName = obstacleNames[randomObstacle]
+			let size = obstaclesSize[randomObstacle]
 
 			obstacle.setItem([
 				...obstacle.item,
@@ -51,7 +59,9 @@ const Obstacle = () => {
 					sourcePath: fileName,
 					key: identification,
 					move: 500,
-					setMove: () => { }
+					size: { height: size.height, width: size.width },
+					setMove: () => { },
+					setSize: () => { }
 				}
 			] as itemObstacle[])
 
@@ -62,7 +72,7 @@ const Obstacle = () => {
 			if (obstacle.item.length == 0) return
 
 			obstacle.item.map((obj) => {
-				obj.setMove(--obj.move)
+				obj.setMove(obj.move -= speedMove)
 
 				if (obj.move <= -110) remove(obj.key)
 			})
