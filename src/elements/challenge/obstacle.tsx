@@ -22,14 +22,15 @@ const Obstacle = () => {
 	let [speedMove, setSpeedMove] = useState<number>(16)
 	const obstacleNames = [
 		findObstacleImgs({ name: "traffic cone" }),
-		// findObstacleImgs({ name: "car" }),
-		// findObstacleImgs({ name: "rock" })
+		findObstacleImgs({ name: "rock" }),
+		findObstacleImgs({ name: "car" })
 	]
 	const obstaclesSize = [
 		obstacleSize({ name: "traffic cone" }),
-		obstacleSize({ name: "car" }),
-		obstacleSize({ name: "rock" })
+		obstacleSize({ name: "rock" }),
+		obstacleSize({ name: "car" })
 	]
+	let [obstacleLimit,setObstacleLimit] = useState(obstacleNames.length)
 
 	useEffect(() => {
 		if (typeof time === "number" &&
@@ -49,19 +50,20 @@ const Obstacle = () => {
 		}
 
 		if (score.pits % 10 == 0 && speedMove != speedLimit) setSpeedMove(++speedMove)
-
+		
 		const create = () => {
 			if (!permision.create) return
 
-			let randomObstacle = Math.round(Math.random() * (obstacleNames.length - 1))
+			let index = obstacleNames.length - obstacleLimit
+			let randomObstacle = Math.round(Math.random() * index)
 			let identification = createIdentification()
-			let fileName = obstacleNames[randomObstacle]
+			let name = obstacleNames[randomObstacle]
 			let size = obstaclesSize[randomObstacle]
 
 			obstacle.setItem([
 				...obstacle.item,
 				{
-					sourcePath: fileName,
+					sourcePath: name,
 					key: identification,
 					move: 500,
 					size: { height: size.height, width: size.width },
@@ -81,7 +83,6 @@ const Obstacle = () => {
 
 				if (obj.move <= -110) remove(obj.key)
 			})
-			console.log(speedMove)
 		}
 
 		const remove = (key: string) => {
@@ -99,16 +100,27 @@ const Obstacle = () => {
 				/>
 			}))
 		}
+		const breakLimit = () => {
+			switch (score.pits) {
+				case 50:
+					if (obstacleLimit != 2) setObstacleLimit(--obstacleLimit)
+					break
+				case 120:
+					if (obstacleLimit != 1) setObstacleLimit(--obstacleLimit)
+					break
+			}
+		}
 
 		const obstacleManager = setInterval(() => {
 			if (pause.active) return
 			create()
 			move()
 			render()
+			breakLimit()
 		}, time)
 
 		return () => clearInterval(obstacleManager)
-	}, [obstacle, pause.active])
+	}, [obstacle, pause.active,obstacleLimit,speedLimit])
 
 	return (<>
 		<div id="base-obstacle">
