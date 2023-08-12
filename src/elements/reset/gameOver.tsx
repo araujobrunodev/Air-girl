@@ -23,7 +23,7 @@ const GameOver = () => {
 		}
 
 
-	}, [loading.waiting.gameOver])
+	}, [loading.waiting])
 
 	return (<>
 		<div id="div-gameover">
