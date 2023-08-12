@@ -19,7 +19,7 @@ const Obstacle = () => {
 	let obstacle = useObstacle()
 	let permision = usePermision()
 	let [Render, setRender] = useState<any>()
-	let [speedMove, setSpeedMove] = useState<number>(16)
+	let [speedMove, setSpeedMove] = useState<number>(5)
 	const obstacleNames = [
 		findObstacleImgs({ name: "traffic cone" }),
 		findObstacleImgs({ name: "rock" }),
@@ -65,7 +65,7 @@ const Obstacle = () => {
 				{
 					sourcePath: name,
 					key: identification,
-					move: 500,
+					move: 700,
 					size: { height: size.height, width: size.width },
 					setMove: () => { },
 					setSize: () => { }
@@ -100,19 +100,21 @@ const Obstacle = () => {
 				/>
 			}))
 		}
+		
 		const breakLimit = () => {
 			switch (score.pits) {
 				case 50:
 					if (obstacleLimit != 2) setObstacleLimit(--obstacleLimit)
 					break
-				case 120:
+				case 300:
 					if (obstacleLimit != 1) setObstacleLimit(--obstacleLimit)
 					break
 			}
 		}
 
+		if (pause.active) return
+
 		const obstacleManager = setInterval(() => {
-			if (pause.active) return
 			create()
 			move()
 			render()
