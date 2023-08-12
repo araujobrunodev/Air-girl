@@ -11,7 +11,7 @@ const Wait = () => {
 	let [message, setMeassage] = useState<string>("")
 
 	callElements()
-
+	
 	useEffect(() => {
 		if (!loading.waiting.player) {
 			setMeassage("loading player...")
@@ -30,6 +30,9 @@ const Wait = () => {
 			return
 		} else if (!loading.waiting.obstacle) {
 			setMeassage("loading obstacle...")
+			return
+		} else if (!loading.waiting.gameOver) {
+			setMeassage("loading gameover...")
 			return
 		} else {
 			setMeassage("")
