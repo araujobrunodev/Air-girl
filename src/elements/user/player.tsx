@@ -13,8 +13,8 @@ const Player = () => {
 	let pause = usePause()
 	let press = usePress()
 	let loading = useLoading()
-	let sizeDevice = useDeviceSize()
 	let obstacle = useObstacle()
+	let sizeDevice = useDeviceSize()
 	const defaultPostion = topAddition({ to: "player", size: sizeDevice.size.height })
 	let [RP, setRP] = useState(<></>)
 	let [repeat, setRepeat] = useState(0)
@@ -95,6 +95,17 @@ const Player = () => {
 			return () => clearTimeout(fase)
 		}
 
+		let fallenP = () => {
+			if (spriteNumber == 0 ||
+				spriteNumber == 1 ||
+				spriteNumber == 2 ||
+				spriteNumber == 5 ||
+				spriteNumber == 6) {
+				pause.setActive(true)
+				return setSpriteNumber(3)
+			}
+		}
+
 		let collision = () => {
 			if (obstacle.item.length == 0) return
 
@@ -113,6 +124,7 @@ const Player = () => {
 				if (distance.x > obst.move && distance.x < obst.size.width &&
 					distance.y < obst.size.height && distance.y > obstaclePosY) {
 					console.log("collision detected")
+					fallenP()
 				}
 			})
 		}
@@ -139,7 +151,7 @@ const Player = () => {
 
 			list.map((it) => clearInterval(it))
 		}
-	}, [RP])
+	}, [RP,spriteNumber,pause.active])
 
 	return (<>
 		{RP}
