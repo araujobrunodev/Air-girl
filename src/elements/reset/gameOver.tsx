@@ -1,10 +1,14 @@
+import { useObstacle } from "../../globalContext/childsObstacle"
 import { useGameOver } from "../../globalContext/gameover"
 import { useLoading } from "../../globalContext/loading"
+import { useScore } from "../../globalContext/score"
 import { useEffect } from "react"
 import "../../css/gameOver.css"
 
 const GameOver = () => {
+	let score = useScore()
 	let loading = useLoading()
+	let obstacle = useObstacle()
 	let gameover = useGameOver()
 
 	useEffect(() => {
@@ -22,16 +26,29 @@ const GameOver = () => {
 				theme: loading.waiting.theme
 			})
 		}
-
-
 	}, [loading.waiting])
 
 	return (<>
-		<div id="div-gameover">
-			<button id="button-gameover">
-				Try again
-			</button>
-		</div>
+		<button
+			id="button-gameover"
+			onClick={() => {
+				score.setPits(0)
+
+				loading.setWaiting({
+					bestScore: false,
+					floor: false,
+					gameOver: false,
+					obstacle: false,
+					pause: false,
+					player: false,
+					score: false,
+					theme: false
+				})
+
+				obstacle.setItem([])
+			}}>
+			Try again
+		</button>
 	</>)
 }
 
