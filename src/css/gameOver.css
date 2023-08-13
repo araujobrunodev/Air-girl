@@ -1,26 +1,20 @@
-#div-gameover {
+#button-gameover {
     position: absolute;
 
-    top: 50%;
-    left: 30%;
+    font-size: 1.8rem;
+
+    top: 55%;
+    left: 27%;
 
     width: 45%;
     height: 10%;
 
-    background: orangered;
+    background: #FF7A00;
 
-    border: 2px solid black;
+    transition: all 3s;
+
     border-radius: 6px;
-}
+    border: 2px solid black;
 
-#button-gameover {
-    position: relative;
-
-    font-size: 1.8rem;
-
-    top: 25%;
-    left: 15%;
-
-    border: none;
-    background-color: transparent;
+    box-shadow: 2px 4px 3px black;
 }
