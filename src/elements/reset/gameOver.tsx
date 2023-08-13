@@ -1,6 +1,7 @@
-import { useLoading } from "../../globalContext/loading"
 import { useGameOver } from "../../globalContext/gameover"
+import { useLoading } from "../../globalContext/loading"
 import { useEffect } from "react"
+import "../../css/gameOver.css"
 
 const GameOver = () => {
 	let loading = useLoading()
