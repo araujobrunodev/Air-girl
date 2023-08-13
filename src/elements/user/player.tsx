@@ -4,6 +4,7 @@ import { useLoading } from "../../globalContext/loading"
 import { usePress } from "../../globalContext/press"
 import { usePause } from "../../globalContext/pause"
 import { useState, useEffect } from "react"
+import { useGameOver } from "../../globalContext/gameover"
 import getDistance from "../distance"
 import RenderPlayer from "./render"
 import topAddition from "../topAdd"
@@ -12,6 +13,7 @@ import topAddition from "../topAdd"
 const Player = () => {
 	let pause = usePause()
 	let press = usePress()
+	let gameover = useGameOver()
 	let loading = useLoading()
 	let obstacle = useObstacle()
 	let sizeDevice = useDeviceSize()
@@ -125,6 +127,7 @@ const Player = () => {
 					distance.y < obst.size.height && distance.y > obstaclePosY) {
 					console.log("collision detected")
 					fallenP()
+					gameover.setActive(true)
 				}
 			})
 		}
