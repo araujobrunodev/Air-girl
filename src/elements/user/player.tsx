@@ -16,17 +16,17 @@ const Player = () => {
 	let gameover = useGameOver()
 	let loading = useLoading()
 	let obstacle = useObstacle()
-	let sizeDevice = useDeviceSize()
-	const defaultPostion = topAddition({ to: "player", size: sizeDevice.size.height })
+	let size = useDeviceSize().size.height
+	let defaultPosition = topAddition({ to: "player", size: size })
 	let [RP, setRP] = useState(<></>)
 	let [repeat, setRepeat] = useState(0)
 	let [active, setActive] = useState<string>("")
-	let [position, setPosition] = useState(defaultPostion)
+	let [position, setPosition] = useState(defaultPosition)
 	let [spriteNumber, setSpriteNumber] = useState<number>(0)
 
 	useEffect(() => {
 		if (typeof press.event === "boolean" &&
-			typeof defaultPostion === "number" &&
+			typeof defaultPosition === "number" &&
 			typeof repeat === "number" &&
 			typeof active === "string" &&
 			typeof position === "number" &&
@@ -45,8 +45,10 @@ const Player = () => {
 			})
 		}
 
+		if (!gameover.active && spriteNumber == 0) setSpriteNumber(1)
+
 		let jumpP = () => {
-			if (pause.active) { return press.setEvent(false) };
+			if (pause.active) return press.setEvent(false);
 			if (!press.event) return;
 
 			let fase1 = setTimeout(() => {
@@ -55,8 +57,8 @@ const Player = () => {
 				if (active == "") {
 					setSpriteNumber(5)
 					setRepeat(repeat += 1)
-					setPosition(defaultPostion + (defaultS * repeat))
-
+					setPosition(defaultPosition + (defaultS * repeat))
+					
 					if (repeat == 2) setActive(active = "1")
 
 					return;
@@ -64,7 +66,7 @@ const Player = () => {
 				if (active == "1") {
 					setSpriteNumber(6)
 					setRepeat(repeat--)
-					setPosition(defaultPostion + (defaultS / repeat))
+					setPosition(defaultPosition + (defaultS / repeat))
 
 					if (repeat == 1) setActive("2")
 
@@ -75,7 +77,7 @@ const Player = () => {
 					setRepeat(0)
 					setActive("")
 					setSpriteNumber(1)
-					setPosition(defaultPostion)
+					setPosition(defaultPosition)
 					press.setEvent(false)
 					return;
 				}
@@ -111,11 +113,11 @@ const Player = () => {
 		let collision = () => {
 			if (obstacle.item.length == 0) return
 
-			let obstaclePosY = topAddition({ size: sizeDevice.size.height, to: "obstacle" })
+			let obstaclePosY = topAddition({ size: size, to: "obstacle" })
 
 			obstacle.item.map((obst) => {
 				let distance = getDistance({
-					size: sizeDevice.size.height,
+					size: size,
 					obstacle: obst,
 					player: {
 						x: 13,
@@ -125,7 +127,6 @@ const Player = () => {
 
 				if (distance.x > obst.move && distance.x < obst.size.width &&
 					distance.y < obst.size.height && distance.y > obstaclePosY) {
-					console.log("collision detected")
 					fallenP()
 					gameover.setActive(true)
 				}
@@ -154,7 +155,7 @@ const Player = () => {
 
 			list.map((it) => clearInterval(it))
 		}
-	}, [RP,spriteNumber,pause.active])
+	}, [RP,spriteNumber,pause.active,gameover.active])
 
 	return (<>
 		{RP}
