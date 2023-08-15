@@ -1,4 +1,5 @@
 import { useRecord } from "../../globalContext/record"
+import "../../css/bestScore.css"
 
 const BestScore = () => {
     const record = useRecord()
@@ -6,7 +7,7 @@ const BestScore = () => {
     return (<>
         <p 
         id="bestScore">
-            bestScore:{record.value}
+            bestScore: {record.value}
         </p>
     </>)
 }
