@@ -5,8 +5,8 @@ interface Record {
     setValue:(val:number) => void
 }
 
-const CreateContext = createContext({} as Record)
+const CreateRecord = createContext({} as Record)
 
-const useRecord = () => useContext(CreateContext)
+const useRecord = () => useContext(CreateRecord)
 
-export { CreateContext, useRecord }
+export { CreateRecord, useRecord }
