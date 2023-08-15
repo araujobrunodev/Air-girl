@@ -1,3 +1,4 @@
+import BestScore from "../elements/bestScore/highScore"
 import { useGameOver } from "../globalContext/gameover"
 import Obstacle from "../elements/challenge/obstacle"
 import { useStart } from "../globalContext/start"
@@ -19,6 +20,7 @@ const Play = () => {
         {!start.canStart ?
             <Wait /> :
             <>
+                <BestScore/>
                 <Score/>
                 <Halt/>
                 
