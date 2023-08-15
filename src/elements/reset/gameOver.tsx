@@ -6,9 +6,9 @@ import { useLoading } from "../../globalContext/loading"
 import { useScore } from "../../globalContext/score"
 import { useStart } from "../../globalContext/start"
 import { usePress } from "../../globalContext/press"
+import { usePause } from "../../globalContext/pause"
 import { useEffect } from "react"
 import "../../css/gameOver.css"
-import { usePause } from "../../globalContext/pause"
 
 const GameOver = () => {
 	let score = useScore()
@@ -41,12 +41,14 @@ const GameOver = () => {
 			press.setEvent(false)
 			pause.setActive(true)
 		}
-	}, [loading.waiting,gameover.active,press.event,pause.active])
+	}, [loading.waiting, gameover.active, press.event, pause.active])
 
 	return (<>
 		<button
 			id="button-gameover"
 			onClick={() => {
+				let LS = localStorage.getItem("bestScore")
+
 				loading.setWaiting({
 					bestScore: false,
 					gameOver: false,
@@ -57,7 +59,13 @@ const GameOver = () => {
 					score: false,
 					theme: loading.waiting.theme
 				})
-				
+
+				if (LS != undefined) {
+					if (JSON.parse(LS) < score.pits)
+						localStorage.setItem("bestScore", JSON.stringify(score.pits))
+				} else
+					localStorage.setItem("bestScore", JSON.stringify(score.pits))
+
 				score.setPits(0)
 				obstacle.setItem([])
 				childsTheme.setChilds([])
