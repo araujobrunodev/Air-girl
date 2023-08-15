@@ -25,12 +25,12 @@ const Play = () => {
                 <Halt/>
                 
                 <Theme />
-                <TouchScreen />
                 <Floor/>
                 <Obstacle/>
 
                 <Player />
 
+                <TouchScreen />
                 { gameover.active ?
                     <GameOver/> : undefined
                 }
