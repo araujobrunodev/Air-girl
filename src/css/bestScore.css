@@ -1,0 +1,9 @@
+#bestScore {
+    position: absolute;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    top: 1%;
+    left: 3%;
+}
