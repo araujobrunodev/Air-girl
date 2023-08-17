@@ -1,10 +1,11 @@
 import { useObstacle } from "../../globalContext/childsObstacle"
 import { useDeviceSize } from "../../globalContext/deviceSize"
+import { useGameOver } from "../../globalContext/gameover"
 import { useLoading } from "../../globalContext/loading"
 import { usePress } from "../../globalContext/press"
 import { usePause } from "../../globalContext/pause"
+import { useScore } from "../../globalContext/score"
 import { useState, useEffect } from "react"
-import { useGameOver } from "../../globalContext/gameover"
 import getDistance from "../distance"
 import RenderPlayer from "./render"
 import topAddition from "../topAdd"
@@ -13,8 +14,9 @@ import topAddition from "../topAdd"
 const Player = () => {
 	let pause = usePause()
 	let press = usePress()
-	let gameover = useGameOver()
+	let score = useScore()
 	let loading = useLoading()
+	let gameover = useGameOver()
 	let obstacle = useObstacle()
 	let size = useDeviceSize().size.height
 	let defaultPosition = topAddition({ to: "player", size: size })
@@ -45,35 +47,28 @@ const Player = () => {
 			})
 		}
 
-		if (!gameover.active && spriteNumber == 0) setSpriteNumber(1)
+		if (score.pits == 0) setSpriteNumber(0)
 
 		let jumpP = () => {
-			if (pause.active) return press.setEvent(false);
 			if (!press.event) return;
+			let defaultS: number = 45
 
 			let fase1 = setTimeout(() => {
-				let defaultS: number = 45
-
 				if (active == "") {
 					setSpriteNumber(5)
-					setRepeat(repeat += 1)
+					setRepeat(++repeat)
 					setPosition(defaultPosition + (defaultS * repeat))
-					
 					if (repeat == 2) setActive(active = "1")
-
 					return;
-				}
-				if (active == "1") {
+
+				} else if (active == "1") {
 					setSpriteNumber(6)
-					setRepeat(repeat--)
+					setRepeat(--repeat)
 					setPosition(defaultPosition + (defaultS / repeat))
-
 					if (repeat == 1) setActive("2")
-
 					return;
-				}
 
-				if (active == "2") {
+				} else if (active == "2") {
 					setRepeat(0)
 					setActive("")
 					setSpriteNumber(1)
@@ -81,38 +76,30 @@ const Player = () => {
 					press.setEvent(false)
 					return;
 				}
-			}, 70)
+			}, 65)
 
 			return () => clearTimeout(fase1)
 		}
 
 		let runP = () => {
 			if (press.event) return;
-			if (pause.active) return;
 
 			let fase = setTimeout(() => {
-				if (spriteNumber === 0) return setSpriteNumber(1)
+				if (spriteNumber === 0 || spriteNumber == 2) return setSpriteNumber(1)
 				if (spriteNumber === 1) return setSpriteNumber(2)
-				if (spriteNumber === 2) return setSpriteNumber(1)
 			}, 150)
 
 			return () => clearTimeout(fase)
 		}
 
 		let fallenP = () => {
-			if (spriteNumber == 0 ||
-				spriteNumber == 1 ||
-				spriteNumber == 2 ||
-				spriteNumber == 5 ||
-				spriteNumber == 6) {
-				pause.setActive(true)
-				return setSpriteNumber(3)
-			}
+			if (spriteNumber == 6) return;
+			pause.setActive(true)
+			setSpriteNumber(3)
 		}
 
 		let collision = () => {
 			if (obstacle.item.length == 0) return
-
 			let obstaclePosY = topAddition({ size: size, to: "obstacle" })
 
 			obstacle.item.map((obst) => {
@@ -145,17 +132,18 @@ const Player = () => {
 		}
 
 		let Main = setTimeout(() => {
+			renderP()
+			if (pause.active) return;
 			runP()
 			jumpP()
-			renderP()
-		}, 30)
+		}, 50)
 
 		return () => {
-			let list = [Main, hitbox]
+			let list = [hitbox,Main]
 
 			list.map((it) => clearInterval(it))
 		}
-	}, [RP,spriteNumber,pause.active,gameover.active])
+	}, [RP, spriteNumber, pause.active, gameover.active])
 
 	return (<>
 		{RP}
