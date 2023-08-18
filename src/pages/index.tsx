@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import "../css/mainPage.css"
 
 const MainPage = () => {
-    return (<>
+    return (<div id="mainBody">
         <div id="line-left"></div>
         <div id="line-right"></div>
 
@@ -20,7 +20,7 @@ const MainPage = () => {
         <Link to={"/playing"}>
             <button id="mainButton">Play</button>
         </Link>
-    </>)
+    </div>)
 }
 
 export default MainPage
