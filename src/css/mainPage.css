@@ -2,6 +2,10 @@ body {
     overflow: hidden;
 }
 
+#mainBody {
+    background: #252525;
+}
+
 .Container {
     position:relative;
     
