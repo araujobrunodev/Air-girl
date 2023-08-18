@@ -34,6 +34,9 @@ const Wait = () => {
 		} else if (!loading.waiting.gameOver) {
 			setMeassage("loading gameover...")
 			return
+		} else if (!loading.waiting.bestScore) {
+			setMeassage("loading bestScore...")
+			return
 		} else {
 			setMeassage("")
 			return start.setCanStart(true)

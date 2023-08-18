@@ -4,6 +4,7 @@ import { ChildsTheme, Item } from './globalContext/childsTheme'
 import { CreatePermision } from './globalContext/permision'
 import { CreateGameOver } from './globalContext/gameover'
 import { DeviceSize } from './globalContext/deviceSize'
+import { CreateRecord } from "./globalContext/record"
 import { CreatePause } from './globalContext/pause'
 import { CreateScore } from './globalContext/score'
 import { CreateStart } from "./globalContext/start"
@@ -18,6 +19,7 @@ function Game() {
   let [start, setStart] = useState<boolean>(false)
   let [pause, setPause] = useState<boolean>(false)
   let [reset, setReset] = useState<boolean>(false)
+  let [record, setRecord] = useState<number>(0)
   let [permision, setPermision] = useState<boolean>(false)
   let [childsTheme, setChildsTheme] = useState([] as Item[])
   let [obstacle, setObstacle] = useState([] as itemObstacle[])
@@ -49,7 +51,9 @@ function Game() {
                   <CreatePause.Provider value={{ active: pause, setActive: setPause }}>
                     <CreateObstacle.Provider value={{ item: obstacle, setItem: setObstacle }}>
                       <CreatePermision.Provider value={{ create: permision, setCreate: setPermision }}>
-                        <RouterProvider router={router} />
+                        <CreateRecord.Provider value={{value:record,setValue:setRecord}}>
+                          <RouterProvider router={router} />
+                        </CreateRecord.Provider>
                       </CreatePermision.Provider>
                     </CreateObstacle.Provider>
                   </CreatePause.Provider>

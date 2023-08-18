@@ -1,4 +1,4 @@
-#button-gameover {
+.gameover {
     position: absolute;
 
     font-size: 1.8rem;
@@ -11,10 +11,5 @@
 
     background: #FF7A00;
 
-    transition: all 3s;
-
     border-radius: 6px;
-    border: 2px solid black;
-
-    box-shadow: 2px 4px 3px black;
 }

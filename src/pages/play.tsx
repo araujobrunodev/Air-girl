@@ -1,4 +1,5 @@
 import { useGameOver } from "../globalContext/gameover"
+import BestScore from "../elements/bestScore/highScore"
 import Obstacle from "../elements/challenge/obstacle"
 import { useStart } from "../globalContext/start"
 import GameOver from "../elements/reset/gameOver"
@@ -16,6 +17,7 @@ const Play = () => {
     let gameover = useGameOver()
 
     return (<>
+        <BestScore/>
         {!start.canStart ?
             <Wait /> :
             <>
@@ -23,12 +25,12 @@ const Play = () => {
                 <Halt/>
                 
                 <Theme />
-                <TouchScreen />
                 <Floor/>
                 <Obstacle/>
 
                 <Player />
 
+                <TouchScreen />
                 { gameover.active ?
                     <GameOver/> : undefined
                 }
