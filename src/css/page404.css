@@ -22,6 +22,7 @@ h1 {
 
 
 li {
+    color: #ffffff;
     margin-top: 0.5rem;
 
     font-family: 'Readex Pro', sans-serif;
@@ -47,6 +48,8 @@ h2 {
     font-size: 1.6rem;
     font-weight: 600;
 
+    color: #ffffff;
+    
     line-height: 60rem;
 
     text-align: center;
