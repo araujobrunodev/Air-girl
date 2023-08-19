@@ -1,6 +1,12 @@
+import "../css/page404.css"
+
 const PageNotFound = () => {
     return (<div id="page-not-found">
-        <h1>Page not found</h1>
+        <h1>
+            Page  
+            not <br/> 
+            found
+        </h1>
 
         <ul>
             <li>
