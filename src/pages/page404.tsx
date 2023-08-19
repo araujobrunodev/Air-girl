@@ -1,5 +1,5 @@
 const PageNotFound = () => {
-    return (<>
+    return (<div id="page-not-found">
         <h1>Page not found</h1>
 
         <ul>
@@ -17,7 +17,7 @@ const PageNotFound = () => {
         </ul>
 
         <h2>status 404</h2>
-    </>)
+    </div>)
 }
 
 export default PageNotFound
