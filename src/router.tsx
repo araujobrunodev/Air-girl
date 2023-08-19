@@ -1,10 +1,12 @@
 import {createBrowserRouter,Outlet} from "react-router-dom"
-import MainPage from "./pages"
+import PageNotFound from "./pages/page404"
 import Play from "./pages/play"
+import MainPage from "./pages"
 
 const router = createBrowserRouter([{
     path:"/",
     element:<Outlet/>,
+    errorElement:<PageNotFound/>,
     children:[
         {
             path:"/",
