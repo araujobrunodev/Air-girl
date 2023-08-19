@@ -18,7 +18,10 @@ const PageNotFound = () => {
             </li>
             
             <li>
-                report the problem <a href="" target="_blank" id="link">here</a>
+                report the problem 
+                <a href="https://github.com/slamanoweb35/Air-girl/issues" 
+                target="_blank" 
+                id="link">here</a>
             </li>
         </ul>
 
