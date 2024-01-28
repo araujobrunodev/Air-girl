@@ -3,9 +3,5 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/Air-girl",
   plugins: [react()],
-  server: {
-    port: 10000
-  }
 })
