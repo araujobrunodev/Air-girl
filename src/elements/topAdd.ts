@@ -17,22 +17,6 @@ const topAddition = ({ to, size }: TopAddition): number => {
             else if (size >= 375) result = -462;
             else if (size >= 360) result = -420;
             break
-        case "theme":
-            if (size >= 900) result = 20;
-            else if (size >= 800) result = 14;
-            else if (size >= 700) result = 1;
-            else result = 0
-            break       
-        case "baseTheme":
-            if (size >= 920) result = 47;
-            else if (size >= 900) result = 45;
-            else if (size >= 890) result = 53;
-            else if (size >= 880) result = 45;
-            else if (size >= 850) result = 27;
-            else if (size >= 840) result = 20;
-            else if (size >= 800) result = -3;
-            else if (size >= 700) result = 7;
-            break
         case "obstacle":
             result = -1
             break
