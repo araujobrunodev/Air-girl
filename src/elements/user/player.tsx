@@ -18,7 +18,7 @@ const Player = () => {
 	let loading = useLoading()
 	let gameover = useGameOver()
 	let obstacle = useObstacle()
-	let size = useDeviceSize().size.height
+	let size = useDeviceSize().size.width
 	let defaultPosition = topAddition({ to: "player", size: size })
 	let [RP, setRP] = useState(<></>)
 	let [repeat, setRepeat] = useState(0)
