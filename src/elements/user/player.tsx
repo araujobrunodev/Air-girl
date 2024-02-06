@@ -36,14 +36,8 @@ const Player = () => {
 			!loading.waiting.player
 		) {
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: loading.waiting.gameOver,
-				obstacle: loading.waiting.obstacle,
-				pause: loading.waiting.pause,
+				...loading.waiting,
 				player: true,
-				score: loading.waiting.score,
-				theme: loading.waiting.theme
 			})
 		}
 

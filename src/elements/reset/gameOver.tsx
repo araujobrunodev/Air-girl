@@ -30,14 +30,8 @@ const GameOver = () => {
 			typeof gameover.active === "boolean") {
 
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: true,
-				obstacle: loading.waiting.obstacle,
-				pause: loading.waiting.pause,
-				player: loading.waiting.player,
-				score: loading.waiting.score,
-				theme: loading.waiting.theme
+				...loading.waiting,
+				gameOver: true
 			})
 		}
 
@@ -58,14 +52,8 @@ const GameOver = () => {
 
 				setTimeout(() => {
 					loading.setWaiting({
-						bestScore: false,
-						gameOver: false,
-						obstacle: false,
-						player: false,
-						floor: false,
-						pause: false,
-						score: false,
-						theme: loading.waiting.theme
+						...loading.waiting,
+						gameOver: false
 					})
 
 					permision.setCreate(false)

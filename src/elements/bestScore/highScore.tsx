@@ -13,14 +13,8 @@ const BestScore = () => {
 		if (typeof record.value != "undefined" &&
 			!loading.waiting.bestScore) {
 			loading.setWaiting({
-				obstacle: loading.waiting.obstacle,
-				gameOver: loading.waiting.gameOver,
+				...loading.waiting,
 				bestScore: loading.waiting.bestScore = true,
-				player: loading.waiting.player,
-				floor: loading.waiting.floor,
-				pause: loading.waiting.pause,
-				score: loading.waiting.score,
-				theme: loading.waiting.theme
 			})
 		}
 

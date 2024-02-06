@@ -13,14 +13,8 @@ const Halt = () => {
 		if (typeof pause.active === "boolean" &&
 			!loading.waiting.pause) {
 				loading.setWaiting({
-					bestScore:loading.waiting.bestScore,
-					floor:loading.waiting.floor,
-					gameOver:loading.waiting.gameOver,
-					obstacle:loading.waiting.obstacle,
+					...loading.waiting,
 					pause:true,
-					player:loading.waiting.player,
-					score:loading.waiting.score,
-					theme:loading.waiting.theme
 			})
 			}
 	},[loading])

@@ -7,14 +7,8 @@ const Floor = () => {
     useEffect(() => {
         if (!loading.waiting.floor) {
             loading.setWaiting({
-                bestScore:loading.waiting.bestScore,
+                ...loading.waiting,
                 floor:true,
-                gameOver:loading.waiting.gameOver,
-                obstacle:loading.waiting.obstacle,
-                pause:loading.waiting.pause,
-                player:loading.waiting.player,
-                score:loading.waiting.score,
-                theme:loading.waiting.theme
             })
         } 
     },[loading])

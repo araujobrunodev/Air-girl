@@ -40,14 +40,8 @@ const Obstacle = () => {
 			typeof pause.active === "boolean" &&
 			!loading.waiting.obstacle) {
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: loading.waiting.gameOver,
+				...loading.waiting,
 				obstacle: true,
-				pause: loading.waiting.pause,
-				player: loading.waiting.player,
-				score: loading.waiting.score,
-				theme: loading.waiting.theme,
 			})
 		}
 

@@ -27,13 +27,7 @@ const Theme = () => {
 			!loading.waiting.theme
 		) {
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: loading.waiting.gameOver,
-				obstacle: loading.waiting.obstacle,
-				pause: loading.waiting.pause,
-				player: loading.waiting.player,
-				score: loading.waiting.score,
+				...loading.waiting,
 				theme: true
 			})
 		}
