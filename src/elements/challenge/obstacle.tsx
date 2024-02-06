@@ -1,4 +1,5 @@
 import { itemObstacle, useObstacle } from "../../globalContext/childsObstacle"
+import { useDeviceSize } from "../../globalContext/deviceSize"
 import { usePermision } from "../../globalContext/permision"
 import { useLoading } from "../../globalContext/loading"
 import createIdentification from "../identification"
@@ -17,6 +18,7 @@ const Obstacle = () => {
 	let score = useScore()
 	let loading = useLoading()
 	let obstacle = useObstacle()
+	let device = useDeviceSize()
 	let permision = usePermision()
 	let [Render, setRender] = useState<any>()
 	let [speedMove, setSpeedMove] = useState<number>(5)
@@ -38,14 +40,8 @@ const Obstacle = () => {
 			typeof pause.active === "boolean" &&
 			!loading.waiting.obstacle) {
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: loading.waiting.gameOver,
+				...loading.waiting,
 				obstacle: true,
-				pause: loading.waiting.pause,
-				player: loading.waiting.player,
-				score: loading.waiting.score,
-				theme: loading.waiting.theme,
 			})
 		}
 
@@ -65,7 +61,7 @@ const Obstacle = () => {
 				{
 					sourcePath: name,
 					key: identification,
-					move: 700,
+					move: device.size.width,
 					size: { height: size.height, width: size.width },
 					setMove: () => { },
 					setSize: () => { }

@@ -5,7 +5,6 @@ import createIdentification from "../identification"
 import { usePause } from "../../globalContext/pause"
 import { useEffect, useState } from "react"
 import CreateTheme from "./createTheme"
-import topAddition from "../topAdd"
 import "../../css/theme.css"
 
 const Theme = () => {
@@ -15,7 +14,6 @@ const Theme = () => {
 	let deviceSize = useDeviceSize()
 	let childsTheme = useChildsTheme()
 	let [canCreate, setCanCreate] = useState<boolean>(true)
-	let topAdd = topAddition({ to: "baseTheme", size: deviceSize.size.height })
 	let [component, setComponent] = useState<any>(childsTheme.childs.map((item) => {
 		return <CreateTheme
 			key={item.key}
@@ -29,13 +27,7 @@ const Theme = () => {
 			!loading.waiting.theme
 		) {
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: loading.waiting.gameOver,
-				obstacle: loading.waiting.obstacle,
-				pause: loading.waiting.pause,
-				player: loading.waiting.player,
-				score: loading.waiting.score,
+				...loading.waiting,
 				theme: true
 			})
 		}
@@ -99,9 +91,7 @@ const Theme = () => {
 
 	return (<div
 		id="Container"
-		style={{
-			top: (240 + topAdd) + "px",
-		}}>
+		>
 		{
 			childsTheme.childs.length != 0 ?
 				component : undefined

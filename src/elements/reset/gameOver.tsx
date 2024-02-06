@@ -30,14 +30,8 @@ const GameOver = () => {
 			typeof gameover.active === "boolean") {
 
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: true,
-				obstacle: loading.waiting.obstacle,
-				pause: loading.waiting.pause,
-				player: loading.waiting.player,
-				score: loading.waiting.score,
-				theme: loading.waiting.theme
+				...loading.waiting,
+				gameOver: true
 			})
 		}
 
@@ -55,37 +49,30 @@ const GameOver = () => {
 				let LS = localStorage.getItem("bestScore")
 				setBackgroundColor("purple")
 				setBorderSize(7)
-
+				
 				setTimeout(() => {
-					loading.setWaiting({
-						bestScore: false,
-						gameOver: false,
-						obstacle: false,
-						player: false,
-						floor: false,
-						pause: false,
-						score: false,
-						theme: loading.waiting.theme
-					})
-
-					permision.setCreate(false)
-					pause.setActive(false)
-					score.setPits(0)
+					setBackgroundColor(defaultBackgroundColor)
+					setBorderSize(defaultBorderSize)
 
 					if (LS != undefined) {
 						if (JSON.parse(LS) < score.pits)
 							localStorage.setItem("bestScore", JSON.stringify(score.pits))
 					} else
 						localStorage.setItem("bestScore", JSON.stringify(score.pits))
+					
 
-					setBackgroundColor(defaultBackgroundColor)
-					setBorderSize(defaultBorderSize)
-
-					obstacle.setItem([])
-					childsTheme.setChilds([])
+					loading.setWaiting({
+						...loading.waiting,
+						gameOver: false
+					})
 					gameover.setActive(false)
+					pause.setActive(false)
+					permision.setCreate(false)
 					start.setCanStart(false)
 				}, 1000)
+				childsTheme.setChilds([])
+				obstacle.setItem([])
+				score.setPits(0)
 			}}
 			style={{
 				border: borderSize + "px solid black",

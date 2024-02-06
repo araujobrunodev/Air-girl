@@ -17,14 +17,8 @@ const Score = () => {
         if (typeof score.pits == "number" &&
             !loading.waiting.score) {
             loading.setWaiting({
-                bestScore: loading.waiting.bestScore,
-                floor: loading.waiting.floor,
-                gameOver: loading.waiting.gameOver,
-                obstacle: loading.waiting.obstacle,
-                pause: loading.waiting.pause,
-                player: loading.waiting.player,
+                ...loading.waiting,
                 score: true,
-                theme: loading.waiting.theme
             })
         }
 

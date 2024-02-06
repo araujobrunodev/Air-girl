@@ -18,7 +18,7 @@ const Player = () => {
 	let loading = useLoading()
 	let gameover = useGameOver()
 	let obstacle = useObstacle()
-	let size = useDeviceSize().size.height
+	let size = useDeviceSize().size.width
 	let defaultPosition = topAddition({ to: "player", size: size })
 	let [RP, setRP] = useState(<></>)
 	let [repeat, setRepeat] = useState(0)
@@ -36,14 +36,8 @@ const Player = () => {
 			!loading.waiting.player
 		) {
 			loading.setWaiting({
-				bestScore: loading.waiting.bestScore,
-				floor: loading.waiting.floor,
-				gameOver: loading.waiting.gameOver,
-				obstacle: loading.waiting.obstacle,
-				pause: loading.waiting.pause,
+				...loading.waiting,
 				player: true,
-				score: loading.waiting.score,
-				theme: loading.waiting.theme
 			})
 		}
 

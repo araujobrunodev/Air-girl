@@ -10,28 +10,12 @@ const topAddition = ({ to, size }: TopAddition): number => {
 
     switch (to) {
         case "player":
-            if (size >= 900) result = -590;
-            else if (size >= 880) result = -567;
-						else if (size >= 850) result = -544;
-            else if (size >= 800) result = -507;
-            else if (size >= 700) result = -474;
-            else result = -500
-            break
-        case "theme":
-            if (size >= 900) result = 20;
-            else if (size >= 800) result = 14;
-            else if (size >= 700) result = 1;
-            else result = 0
-            break       
-        case "baseTheme":
-            if (size >= 920) result = 47;
-            else if (size >= 900) result = 45;
-            else if (size >= 890) result = 53;
-            else if (size >= 880) result = 45;
-            else if (size >= 850) result = 27;
-            else if (size >= 840) result = 20;
-            else if (size >= 800) result = -3;
-            else if (size >= 700) result = 7;
+            if (size >= 1200) result = -490;
+            else if (size >= 412) result = -513;
+	        else if (size >= 390) result = -482;
+            else if (size >= 384) result = -491;
+            else if (size >= 375) result = -462;
+            else if (size >= 360) result = -420;
             break
         case "obstacle":
             result = -1
