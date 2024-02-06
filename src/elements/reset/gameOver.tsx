@@ -49,29 +49,28 @@ const GameOver = () => {
 				let LS = localStorage.getItem("bestScore")
 				setBackgroundColor("purple")
 				setBorderSize(7)
-
+				
 				setTimeout(() => {
-					loading.setWaiting({
-						...loading.waiting,
-						gameOver: false
-					})
-
-					permision.setCreate(false)
-					pause.setActive(false)
-					score.setPits(0)
+					setBackgroundColor(defaultBackgroundColor)
+					setBorderSize(defaultBorderSize)
 
 					if (LS != undefined) {
 						if (JSON.parse(LS) < score.pits)
 							localStorage.setItem("bestScore", JSON.stringify(score.pits))
 					} else
 						localStorage.setItem("bestScore", JSON.stringify(score.pits))
+					
 
-					setBackgroundColor(defaultBackgroundColor)
-					setBorderSize(defaultBorderSize)
-
-					obstacle.setItem([])
-					childsTheme.setChilds([])
+					loading.setWaiting({
+						...loading.waiting,
+						gameOver: false
+					})
 					gameover.setActive(false)
+					pause.setActive(false)
+					childsTheme.setChilds([])
+					permision.setCreate(false)
+					score.setPits(0)
+					obstacle.setItem([])
 					start.setCanStart(false)
 				}, 1000)
 			}}
