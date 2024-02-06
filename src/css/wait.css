@@ -23,11 +23,17 @@
     80% {
         transform: rotate(200deg);
     }
-    90% {
+    85% {
         transform: rotate(225deg);
     }
-    100% {
+    90% {
         transform: rotate(250deg);
+    }
+    95% {
+        transform: rotate(275deg);
+    }
+    100% {
+        transform: rotate(300deg);
     }
 }
 
@@ -67,4 +73,12 @@
     font-size: x-large;
 
     top: 85%;
+}
+
+@media only screen and (min-width: 1100px) and (max-width: 1600px) {
+    #iconWait {
+        width: 10%;
+        height: 20%;
+        left: 44%;
+    }
 }
