@@ -9,6 +9,12 @@
     gap: 0%;
 }
 
+@media only screen and (max-width: 1600px) {
+    #Container {
+        top: 44%;
+    }
+}
+
 @media only screen and (max-width: 428px) {
     #Container {
         top: 41%;
