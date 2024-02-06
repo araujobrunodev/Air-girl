@@ -67,12 +67,12 @@ const GameOver = () => {
 					})
 					gameover.setActive(false)
 					pause.setActive(false)
-					childsTheme.setChilds([])
 					permision.setCreate(false)
-					score.setPits(0)
-					obstacle.setItem([])
 					start.setCanStart(false)
 				}, 1000)
+				childsTheme.setChilds([])
+				obstacle.setItem([])
+				score.setPits(0)
 			}}
 			style={{
 				border: borderSize + "px solid black",
