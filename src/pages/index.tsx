@@ -6,7 +6,7 @@ const MainPage = () => {
         <div id="line-left"></div>
         <div id="line-right"></div>
 
-        <div className="Container">
+        <div className="container">
             <div className="Item"></div>
             <div className="Item"></div>
             <div className="Item"></div>
