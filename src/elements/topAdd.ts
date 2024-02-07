@@ -23,9 +23,6 @@ const topAddition = ({ to, size }: TopAddition): number => {
             else if (width >= 375) result = -462;
             else if (width >= 360) result = -420;
             break
-        case "obstacle":
-            result = -1
-            break
     }
 
     return result
