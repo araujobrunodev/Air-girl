@@ -94,7 +94,7 @@ const Player = () => {
 
 		let collision = () => {
 			if (obstacle.item.length == 0) return
-			let obstaclePosY = topAddition({ size: size, to: "obstacle" })
+			let obstaclePosY = -1
 
 			obstacle.item.map((obst) => {
 				let distance = getDistance({
