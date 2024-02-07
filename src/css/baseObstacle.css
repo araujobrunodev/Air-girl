@@ -40,3 +40,10 @@
         top: 34.8rem;
     }
 }
+
+
+@media only screen and (max-width: 375px) and (max-height: 707px) {
+    #base-obstacle {
+        top: 29.9rem;
+    }
+}

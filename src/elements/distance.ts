@@ -7,7 +7,10 @@ interface Distance {
         y:number
     },
     obstacle:itemObstacle,
-    size:number
+    size: {
+        width: number,
+        height: number
+    }
 }
 
 interface Position {
