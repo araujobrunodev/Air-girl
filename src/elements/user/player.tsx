@@ -94,7 +94,6 @@ const Player = () => {
 
 		let collision = () => {
 			if (obstacle.item.length == 0) return
-			let obstaclePosY = -1
 
 			obstacle.item.map((obst) => {
 				let distance = getDistance({
@@ -106,8 +105,9 @@ const Player = () => {
 					}
 				})
 
-				if (distance.x > obst.move && distance.x < obst.size.width &&
-					distance.y < obst.size.height && distance.y > obstaclePosY) {
+				if (distance.x >= -obst.size.width && 
+					distance.x <= 0 && 
+					(-1 * distance.y) <= obst.size.height - 5) {
 					fallenP()
 					gameover.setActive(true)
 				}
