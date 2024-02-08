@@ -99,10 +99,11 @@ const Obstacle = () => {
 		
 		const breakLimit = () => {
 			switch (score.pits) {
-				case 50:
+				case 25: //rock
 					if (obstacleLimit != 2) setObstacleLimit(--obstacleLimit)
 					break
-				case 300:
+
+				case 70: //car
 					if (obstacleLimit != 1) setObstacleLimit(--obstacleLimit)
 					break
 			}
