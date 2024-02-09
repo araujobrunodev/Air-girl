@@ -107,7 +107,7 @@ const Player = () => {
 
 				if (distance.x >= -obst.size.width && 
 					distance.x <= 0 && 
-					(-1 * distance.y) <= obst.size.height - 5) {
+					(-1 * distance.y) <= obst.size.height - 11) {
 					fallenP()
 					gameover.setActive(true)
 				}

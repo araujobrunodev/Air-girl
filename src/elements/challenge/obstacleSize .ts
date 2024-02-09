@@ -13,17 +13,17 @@ const obstacleSize = ({name}:DefaultObstacleSize) => {
 
     switch (name) {
         case "car":
-            result.width = 120 - less
+            result.width = 66 - less
             result.height = 55 - less
             break
 
         case "rock":
-            result.height = 75 - less
+            result.width = 70 - less
             result.height = 60 - less
             break
 
         case "traffic cone":
-            result.width = 50 - less
+            result.width = 48 - less
             result.height = 53 - less
             break
     }
