@@ -2,6 +2,7 @@ import { useGameOver } from "../../globalContext/gameover"
 import { useLoading } from "../../globalContext/loading"
 import { usePause } from "../../globalContext/pause"
 import { useEffect } from "react"
+import unpause from "../../images/unpause.svg"
 import "../../css/pauseOrResume.css"
 
 const Halt = () => {
@@ -25,7 +26,7 @@ const Halt = () => {
 				onClick={() => { return pause.setActive(true) }}
 				id="buttonResume"
 			>
-				<img src="../../../unpause.svg" alt="unpause" />
+				<img src={unpause} alt="unpause" />
 			</button>
 			: 
 			!gameover.active ?
