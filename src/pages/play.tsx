@@ -11,6 +11,7 @@ import Score from "../elements/time/score"
 import Halt from "../elements/pause/halt"
 import Wait from "../elements/load/wait"
 import "../css/contentArea.css"
+import "../css/mainScore.css"
 import "../css/play.css"
 
 const Play = () => {
