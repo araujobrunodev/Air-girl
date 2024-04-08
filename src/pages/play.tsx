@@ -13,6 +13,7 @@ import Wait from "../elements/load/wait"
 import "../css/mainBackground.css"
 import "../css/contentArea.css"
 import "../css/mainScore.css"
+import "../css/mainArea.css"
 import "../css/play.css"
 
 const Play = () => {
@@ -38,8 +39,8 @@ const Play = () => {
                     <div id="mainArea">
                         <Obstacle/>
                         <Player />
-                        <TouchScreen />
                     </div>
+                        <TouchScreen />
 
                 </div>
                 { gameover.active ?
