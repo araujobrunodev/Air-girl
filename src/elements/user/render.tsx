@@ -14,7 +14,7 @@ const RenderPlayer:FC<RenderPlayerProp> = (prop) => {
         alt={allSprite[prop.sprite].Name}
         id="player"
         style={{
-            marginTop:prop.posY + "px"
+            marginTop:prop.posY + "%"
         }}
         />
     </>)

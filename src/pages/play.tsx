@@ -10,6 +10,10 @@ import TouchScreen from "../elements/touch"
 import Score from "../elements/time/score"
 import Halt from "../elements/pause/halt"
 import Wait from "../elements/load/wait"
+import "../css/mainBackground.css"
+import "../css/contentArea.css"
+import "../css/mainScore.css"
+import "../css/mainArea.css"
 import "../css/play.css"
 
 const Play = () => {
@@ -17,20 +21,28 @@ const Play = () => {
     let gameover = useGameOver()
 
     return (<>
-        <BestScore/>
         {!start.canStart ?
             <Wait /> :
             <>
-                <Score/>
-                <Halt/>
+                <div id="contentArea">
+                    <div id="mainScore">
+                        <BestScore/>
+                        <Halt/>
+                        <Score/>
+                    </div>
                 
-                <Theme />
-                <Floor/>
-                <Obstacle/>
+                    <div id="mainBackground">
+                        <Theme />
+                        <Floor/>
+                    </div>
 
-                <Player />
+                    <div id="mainArea">
+                        <Obstacle/>
+                        <Player />
+                    </div>
+                        <TouchScreen />
 
-                <TouchScreen />
+                </div>
                 { gameover.active ?
                     <GameOver/> : undefined
                 }

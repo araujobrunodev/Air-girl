@@ -1,11 +1,10 @@
 #pause,#buttonResume {
-    position: absolute;
+    position: relative;
 
 }
 
 #buttonResume {
-    top: 2%;
-    left: 41%;
+    flex: 1;
 
     background: transparent;
     border: none;

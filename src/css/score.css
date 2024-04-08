@@ -1,8 +1,8 @@
 #score {
-    position: absolute;
+    position: relative;
 
-    top: 1%;
-    left: 65%;
+    
+    flex: 1;
 
     color: black;
 
