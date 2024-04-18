@@ -25,6 +25,7 @@ const Player = () => {
 	let [active, setActive] = useState<string>("")
 	let [position, setPosition] = useState(defaultPosition)
 	let [spriteNumber, setSpriteNumber] = useState<number>(0)
+	let [isJumping,setIsJumping] = useState<boolean>(false)
 
 	useEffect(() => {
 		if (typeof press.event === "boolean" &&
@@ -45,7 +46,9 @@ const Player = () => {
 
 		let jumpP = () => {
 			if (!press.event) return;
-			let defaultS: number = 45
+			let defaultS: number = 15
+
+			setIsJumping(true)
 
 			let fase1 = setTimeout(() => {
 				if (active == "") {
@@ -68,6 +71,7 @@ const Player = () => {
 					setSpriteNumber(1)
 					setPosition(defaultPosition)
 					press.setEvent(false)
+					setIsJumping(false)
 					return;
 				}
 			}, 65)
@@ -97,17 +101,13 @@ const Player = () => {
 
 			obstacle.item.map((obst) => {
 				let distance = getDistance({
-					size: size,
 					obstacle: obst,
-					player: {
-						x: 13,
-						y: position
-					}
+					playerX: 13
 				})
 
-				if (distance.x >= -obst.size.width && 
-					distance.x <= 0 && 
-					(-1 * distance.y) <= obst.size.height - 11) {
+				if (distance >= -27 &&
+					distance <= 30&& 
+					!isJumping) {
 					fallenP()
 					gameover.setActive(true)
 				}
