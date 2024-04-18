@@ -4,16 +4,11 @@
 }
 
 #buttonResume {
-    flex: 1;
-
     background: transparent;
     border: none;
 }
 
 #pause {
-    top: -0.3%;
-    left: 39%;
-
     font-size: 25px;
     font-weight: bolder;
 
@@ -21,12 +16,7 @@
 }
 
 @media only screen and (min-width: 1100px) and (max-width: 1600px) {
-    #buttonResume {
-        left: 48%
-    }
-
     #pause {
-        left: 46%;
         font-size: 30px;
     }
 }
