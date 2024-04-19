@@ -46,10 +46,10 @@ const Player = () => {
 
 		let jumpP = () => {
 			if (!press.event) return;
-			let defaultS: number = 15
+			let defaultS: number = 20
 
 			setIsJumping(true)
-
+			
 			let fase1 = setTimeout(() => {
 				if (active == "") {
 					setSpriteNumber(5)
@@ -74,7 +74,7 @@ const Player = () => {
 					setIsJumping(false)
 					return;
 				}
-			}, 65)
+			}, 60)
 
 			return () => clearTimeout(fase1)
 		}
@@ -85,7 +85,7 @@ const Player = () => {
 			let fase = setTimeout(() => {
 				if (spriteNumber === 0 || spriteNumber == 2) return setSpriteNumber(1)
 				if (spriteNumber === 1) return setSpriteNumber(2)
-			}, 150)
+			}, 90)
 
 			return () => clearTimeout(fase)
 		}

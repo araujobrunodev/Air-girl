@@ -21,7 +21,7 @@ const Obstacle = () => {
 	let device = useDeviceSize()
 	let permision = usePermision()
 	let [Render, setRender] = useState<any>()
-	let [speedMove, setSpeedMove] = useState<number>(5)
+	let [speedMove, setSpeedMove] = useState<number>(9)
 	const obstacleNames = [
 		findObstacleImgs({ name: "traffic cone" }),
 		findObstacleImgs({ name: "rock" }),
@@ -45,9 +45,9 @@ const Obstacle = () => {
 			})
 		}
 
-		if (score.pits % 10 == 0 && speedMove != speedLimit) setSpeedMove(++speedMove)
+		if (score.pits % 10 == 0 && speedMove != speedLimit) setSpeedMove(speedMove += 0.1)
 		
-		const create = () => {
+			const create = () => {
 			if (!permision.create) return
 
 			let index = obstacleNames.length - obstacleLimit
@@ -62,10 +62,11 @@ const Obstacle = () => {
 					sourcePath: name,
 					key: identification,
 					move: device.size.width,
+					speed: speedMove,
 					size: { height: size.height, width: size.width },
 					setMove: () => { },
 					setSize: () => { }
-				}
+				},
 			] as itemObstacle[])
 
 			permision.setCreate(false)
@@ -75,7 +76,7 @@ const Obstacle = () => {
 			if (obstacle.item.length == 0) return
 
 			obstacle.item.map((obj) => {
-				obj.setMove(obj.move -= speedMove)
+				obj.setMove(obj.move -= obj.speed)
 
 				if (obj.move <= -110) remove(obj.key)
 			})
