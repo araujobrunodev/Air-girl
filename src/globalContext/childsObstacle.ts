@@ -10,6 +10,7 @@ interface ItemObstacle {
     move:number,
     sourcePath:string,
     size:ObstacleSize,
+    speed:number,
     setSize:(obstacleSize:ObstacleSize) => void
     setMove:(value:number) => void
 }
