@@ -35,7 +35,7 @@ const Score = () => {
     }, [score.pits,pause.active])
 
     return (<>
-        <p id="score">Score: {
+        <p id="score" translate="no">Score: {
             score.pits
         }</p>
     </>)

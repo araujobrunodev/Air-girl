@@ -28,7 +28,8 @@ const BestScore = () => {
 
 	return (<>
 		<p
-			id="bestScore">
+			id="bestScore"
+			translate="no">
 			bestScore: {record.value}
 		</p>
 	</>)
