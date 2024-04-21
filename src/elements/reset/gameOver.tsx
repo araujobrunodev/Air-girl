@@ -79,7 +79,8 @@ const GameOver = () => {
 				boxShadow: "2px 4px 3px black",
 				transition: "all 100ms",
 				background: backgroundColor
-			}}>
+			}}
+			translate="no">
 			Try again
 		</button>
 	</>)

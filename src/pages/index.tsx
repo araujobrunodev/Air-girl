@@ -15,10 +15,10 @@ const MainPage = () => {
             <div className="Item"></div>
         </div>
 
-        <h1 id="title">Air <br/> girl</h1>
+        <h1 id="title" translate="no">Air <br/> girl</h1>
 
         <Link to={"/playing"}>
-            <button id="mainButton">Play</button>
+            <button id="mainButton" translate="no">Play</button>
         </Link>
     </div>)
 }

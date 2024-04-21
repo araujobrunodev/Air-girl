@@ -33,6 +33,7 @@ const Halt = () => {
 			<p
 				id="pause"
 				onClick={() => {return pause.setActive(false)}}
+				translate="no"
 			>
 				Pause
 			</p>
