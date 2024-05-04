@@ -12,6 +12,7 @@ import topAddition from "../topAdd"
 
 
 const Player = () => {
+	const defaultS: number = 25
 	let pause = usePause()
 	let press = usePress()
 	let score = useScore()
@@ -46,10 +47,9 @@ const Player = () => {
 
 		let jumpP = () => {
 			if (!press.event) return;
-			let defaultS: number = 20
 
 			setIsJumping(true)
-			
+
 			let fase1 = setTimeout(() => {
 				if (active == "") {
 					setSpriteNumber(5)
@@ -58,14 +58,16 @@ const Player = () => {
 					if (repeat == 2) setActive(active = "1")
 					return;
 
-				} else if (active == "1") {
+				}
+				if (active == "1") {
 					setSpriteNumber(6)
 					setRepeat(--repeat)
 					setPosition(defaultPosition + (defaultS / repeat))
 					if (repeat == 1) setActive("2")
 					return;
 
-				} else if (active == "2") {
+				}
+				if (active == "2") {
 					setRepeat(0)
 					setActive("")
 					setSpriteNumber(1)
@@ -74,7 +76,7 @@ const Player = () => {
 					setIsJumping(false)
 					return;
 				}
-			}, 60)
+			}, 43)
 
 			return () => clearTimeout(fase1)
 		}
@@ -85,7 +87,7 @@ const Player = () => {
 			let fase = setTimeout(() => {
 				if (spriteNumber === 0 || spriteNumber == 2) return setSpriteNumber(1)
 				if (spriteNumber === 1) return setSpriteNumber(2)
-			}, 90)
+			}, 45)
 
 			return () => clearTimeout(fase)
 		}
