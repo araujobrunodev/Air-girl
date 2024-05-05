@@ -1,5 +1,4 @@
 import { usePermision } from "../../globalContext/permision"
-import { useLoading } from "../../globalContext/loading"
 import { useScore } from "../../globalContext/score"
 import { useStart } from "../../globalContext/start"
 import { usePause } from "../../globalContext/pause"
@@ -10,18 +9,9 @@ const Score = () => {
     let score = useScore()
     let start = useStart()
     let pause = usePause()
-    let loading = useLoading()
     let permision = usePermision()
 
     useEffect(() => {
-        if (typeof score.pits == "number" &&
-            !loading.waiting.score) {
-            loading.setWaiting({
-                ...loading.waiting,
-                score: true,
-            })
-        }
-
         if (!start.canStart) return;
         if (pause.active) return;
         
@@ -32,13 +22,13 @@ const Score = () => {
         }, 1000 * 1.5)
 
         return () => clearTimeout(time)
-    }, [score.pits,pause.active])
+    }, [score.pits, pause.active])
 
-    return (<>
+    return (
         <p id="score" translate="no">Score: {
             score.pits
         }</p>
-    </>)
+    )
 }
 
 export default Score

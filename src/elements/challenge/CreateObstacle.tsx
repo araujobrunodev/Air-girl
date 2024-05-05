@@ -7,7 +7,7 @@ interface CreateObstacleProp {
 }
 
 const CreateObstacle:FC<CreateObstacleProp> = ({move,source}) => {
-    return (<>
+    return (
         <img
             className="Obstacle"
             src={source}
@@ -16,7 +16,7 @@ const CreateObstacle:FC<CreateObstacleProp> = ({move,source}) => {
                 left:move + "px"
             }}
         />
-    </>)
+    )
 }
 
 export default CreateObstacle

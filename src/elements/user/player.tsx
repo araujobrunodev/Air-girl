@@ -1,7 +1,6 @@
 import { useObstacle } from "../../globalContext/childsObstacle"
 import { useDeviceSize } from "../../globalContext/deviceSize"
 import { useGameOver } from "../../globalContext/gameover"
-import { useLoading } from "../../globalContext/loading"
 import { usePress } from "../../globalContext/press"
 import { usePause } from "../../globalContext/pause"
 import { useScore } from "../../globalContext/score"
@@ -10,13 +9,11 @@ import getDistance from "../distance"
 import RenderPlayer from "./render"
 import topAddition from "../topAdd"
 
-
 const Player = () => {
 	const defaultS: number = 25
 	let pause = usePause()
 	let press = usePress()
 	let score = useScore()
-	let loading = useLoading()
 	let gameover = useGameOver()
 	let obstacle = useObstacle()
 	let size = useDeviceSize().size
@@ -29,20 +26,6 @@ const Player = () => {
 	let [isJumping,setIsJumping] = useState<boolean>(false)
 
 	useEffect(() => {
-		if (typeof press.event === "boolean" &&
-			typeof defaultPosition === "number" &&
-			typeof repeat === "number" &&
-			typeof active === "string" &&
-			typeof position === "number" &&
-			typeof spriteNumber === "number" &&
-			!loading.waiting.player
-		) {
-			loading.setWaiting({
-				...loading.waiting,
-				player: true,
-			})
-		}
-
 		if (score.pits == 0) setSpriteNumber(0)
 
 		let jumpP = () => {

@@ -8,7 +8,7 @@ interface RenderPlayerProp {
 }
 
 const RenderPlayer:FC<RenderPlayerProp> = (prop) => {
-    return (<>
+    return (
         <img
         src={allSprite[prop.sprite].Path}
         alt={allSprite[prop.sprite].Name}
@@ -17,7 +17,7 @@ const RenderPlayer:FC<RenderPlayerProp> = (prop) => {
             marginTop:prop.posY + "%"
         }}
         />
-    </>)
+    )
 }
 
 export default RenderPlayer
