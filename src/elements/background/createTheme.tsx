@@ -1,5 +1,5 @@
 import { FC } from "react"
-import theme from "../../images/theme.png"
+const theme = "/theme.png"
 import "../../css/createTheme.css"
 
 interface CreateThemeProp {
