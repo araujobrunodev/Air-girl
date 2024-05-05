@@ -1,6 +1,6 @@
 import { useGameOver } from "../../globalContext/gameover"
 import { usePause } from "../../globalContext/pause"
-import unpause from "../../images/unpause.svg"
+const unpause = "/unpause.svg"
 import "../../css/pauseOrResume.css"
 
 const Halt = () => {

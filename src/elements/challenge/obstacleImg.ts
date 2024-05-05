@@ -1,6 +1,6 @@
-import car from "../../images/car 1.png"
-import rock from "../../images/rock.png"
-import trafficCone from "../../images/traffic cone.png"
+const car = "/car 1.png"
+const rock = "/rock.png"
+const trafficCone = "/traffic cone.png"
 
 interface ObstacleColletionImgs {
 	readonly name: "car" | "rock" | "traffic cone",

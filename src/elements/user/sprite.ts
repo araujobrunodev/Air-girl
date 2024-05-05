@@ -1,10 +1,10 @@
-import stop from "../../images/girl stopped.png"
-import runner1 from "../../images/girl runner 1.png"
-import runner2 from "../../images/girl runner 2.png"
-import jump1 from "../../images/girl jump 1.png"
-import jump2 from "../../images/girl jump 2.png"
-import fallen1 from "../../images/girl fallen 1.png"
-import fallen2 from "../../images/girl fallen 2.png"
+const stop = "/girl stopped.png"
+const runner1 = "/girl runner 1.png"
+const runner2 = "/girl runner 2.png"
+const jump1 = "/girl jump 1.png"
+const jump2 = "/girl jump 2.png"
+const fallen1 = "/girl fallen 1.png"
+const fallen2 = "/girl fallen 2.png"
 
 interface Sprite {
     Name:string,
