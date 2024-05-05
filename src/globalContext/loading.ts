@@ -1,14 +1,7 @@
 import { createContext,useContext } from "react"
 
 interface WaitingForTheElement {
-    theme:boolean,
-    player:boolean,
-    floor:boolean,
-    score:boolean,
-    bestScore:boolean,
-    obstacle:boolean,
-    pause:boolean,
-    gameOver:boolean
+    images: boolean
 }
 
 interface Loading {

@@ -1,6 +1,4 @@
 import { Item, useChildsTheme } from "../../globalContext/childsTheme"
-import { useDeviceSize } from "../../globalContext/deviceSize"
-import { useLoading } from "../../globalContext/loading"
 import createIdentification from "../identification"
 import { usePause } from "../../globalContext/pause"
 import { useEffect, useState } from "react"
@@ -9,9 +7,7 @@ import "../../css/theme.css"
 
 const Theme = () => {
 	const Time: number = 200
-	let loading = useLoading()
 	let pause = usePause()
-	let deviceSize = useDeviceSize()
 	let childsTheme = useChildsTheme()
 	let [canCreate, setCanCreate] = useState<boolean>(true)
 	let [component, setComponent] = useState<any>(childsTheme.childs.map((item) => {
@@ -22,16 +18,6 @@ const Theme = () => {
 	}))
 
 	useEffect(() => {
-		if (typeof deviceSize.size.width == "number" &&
-			typeof canCreate == "boolean" &&
-			!loading.waiting.theme
-		) {
-			loading.setWaiting({
-				...loading.waiting,
-				theme: true
-			})
-		}
-
 		const CreateT = () => {
 			if (canCreate || childsTheme.childs.length == 0) {
 				childsTheme.setChilds([
@@ -87,16 +73,16 @@ const Theme = () => {
 		}, Time)
 
 		return () => clearInterval(ThemeManager)
-	}, [childsTheme.childs,pause.active])
+	}, [childsTheme.childs, pause.active])
 
-	return (<div
-		id="Container"
-		>
+	return (
+		<div id="Container">
 		{
 			childsTheme.childs.length != 0 ?
 				component : undefined
 		}
-	</div>)
+		</div>
+	)
 }
 
 export default Theme

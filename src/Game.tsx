@@ -30,17 +30,10 @@ function Game() {
     }
   );
   let [waiting, setWaiting] = useState<waitingForTheElement>({
-    bestScore: false,
-    gameOver: false,
-    obstacle: false,
-    player: false,
-    floor: false,
-    pause: false,
-    score: false,
-    theme: false
+    images: false
   })
 
-  return (<>
+  return (
     <DeviceSize.Provider value={{ size: deviceSize, setSize: setDeviceSize }}>
       <CreateGameOver.Provider value={{ active: reset, setActive: setReset }}>
         <ChildsTheme.Provider value={{ childs: childsTheme, setChilds: setChildsTheme }}>
@@ -64,7 +57,7 @@ function Game() {
         </ChildsTheme.Provider>
       </CreateGameOver.Provider>
     </DeviceSize.Provider>
-  </>)
+  )
 }
 
 export default Game

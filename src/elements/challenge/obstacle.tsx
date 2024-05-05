@@ -1,7 +1,6 @@
 import { itemObstacle, useObstacle } from "../../globalContext/childsObstacle"
 import { useDeviceSize } from "../../globalContext/deviceSize"
 import { usePermision } from "../../globalContext/permision"
-import { useLoading } from "../../globalContext/loading"
 import createIdentification from "../identification"
 import { usePause } from "../../globalContext/pause"
 import { useScore } from "../../globalContext/score"
@@ -16,7 +15,6 @@ const Obstacle = () => {
 	const speedLimit = 45
 	let pause = usePause()
 	let score = useScore()
-	let loading = useLoading()
 	let obstacle = useObstacle()
 	let device = useDeviceSize()
 	let permision = usePermision()
@@ -35,19 +33,9 @@ const Obstacle = () => {
 	let [obstacleLimit,setObstacleLimit] = useState(obstacleNames.length)
 
 	useEffect(() => {
-		if (typeof time === "number" &&
-			typeof permision.create === "boolean" &&
-			typeof pause.active === "boolean" &&
-			!loading.waiting.obstacle) {
-			loading.setWaiting({
-				...loading.waiting,
-				obstacle: true,
-			})
-		}
-
 		if (score.pits % 10 == 0 && speedMove != speedLimit) setSpeedMove(speedMove += 0.1)
 		
-			const create = () => {
+		const create = () => {
 			if (!permision.create) return
 
 			let index = obstacleNames.length - obstacleLimit
@@ -122,12 +110,12 @@ const Obstacle = () => {
 		return () => clearInterval(obstacleManager)
 	}, [obstacle, pause.active,obstacleLimit,speedLimit])
 
-	return (<>
+	return (
 		<div id="base-obstacle">
 			{obstacle.item.length != 0 ?
 				Render : undefined}
 		</div>
-	</>)
+	)
 }
 
 export default Obstacle
