@@ -37,7 +37,8 @@ function Game() {
     floor: false,
     pause: false,
     score: false,
-    theme: false
+    theme: false,
+    images: false
   })
 
   return (<>

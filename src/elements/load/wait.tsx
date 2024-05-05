@@ -3,6 +3,7 @@ import { useStart } from "../../globalContext/start"
 import { useEffect, useState } from "react"
 import callElements from "./callElements"
 import allSprite from "../user/sprite"
+import LoadImages from "./loadImages"
 import "../../css/wait.css"
 
 const Wait = () => {
@@ -37,6 +38,9 @@ const Wait = () => {
 		} else if (!loading.waiting.bestScore) {
 			setMeassage("loading bestScore...")
 			return
+		} else if (!loading.waiting.images) {
+			setMeassage("loading images...")
+			console.log("waiting:",loading.waiting)
 		} else {
 			setMeassage("")
 			return start.setCanStart(true)
@@ -48,6 +52,7 @@ const Wait = () => {
 		<div
 			id="divWait"
 		>
+			<LoadImages/>
 			<img src={allSprite[0].Path} id="iconWait"></img>
 
 			<h1 id="message">{ message }</h1>

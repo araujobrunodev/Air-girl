@@ -8,7 +8,8 @@ interface WaitingForTheElement {
     bestScore:boolean,
     obstacle:boolean,
     pause:boolean,
-    gameOver:boolean
+    gameOver:boolean,
+    images: boolean
 }
 
 interface Loading {
