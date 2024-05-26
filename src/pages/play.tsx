@@ -32,15 +32,17 @@ const Play = () => {
                     </div>
                 
                     <div id="mainBackground">
-                        <Theme />
+                        <Theme children={
+                            <div id="mainArea">
+                                <Obstacle/>
+                                <Player />
+                            </div>
+                        }/>
+                        
                         <Floor/>
                     </div>
-
-                    <div id="mainArea">
-                        <Obstacle/>
-                        <Player />
-                    </div>
-                        <TouchScreen />
+                        
+                    <TouchScreen />
 
                 </div>
                 { gameover.active ?
