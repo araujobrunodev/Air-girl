@@ -1,11 +1,15 @@
 import { Item, useChildsTheme } from "../../globalContext/childsTheme"
 import createIdentification from "../identification"
 import { usePause } from "../../globalContext/pause"
-import { useEffect, useState } from "react"
+import { FC, ReactElement, useEffect, useState } from "react"
 import CreateTheme from "./createTheme"
 import "../../css/theme.css"
 
-const Theme = () => {
+interface ThemeProps {
+	children: ReactElement
+}
+
+const Theme: FC<ThemeProps> = ({children}) => {
 	const Time: number = 200
 	let pause = usePause()
 	let childsTheme = useChildsTheme()
@@ -80,6 +84,9 @@ const Theme = () => {
 		{
 			childsTheme.childs.length != 0 ?
 				component : undefined
+		}
+		{
+			children
 		}
 		</div>
 	)
