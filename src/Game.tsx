@@ -9,6 +9,7 @@ import { CreatePause } from './globalContext/pause'
 import { CreateScore } from './globalContext/score'
 import { CreateStart } from "./globalContext/start"
 import { CreatePress } from "./globalContext/press"
+import { CreateObstacleGlobal } from './globalContext/obstacleGlobal'
 import { RouterProvider } from "react-router-dom"
 import { useState } from 'react'
 import router from './router'
@@ -32,6 +33,16 @@ function Game() {
   let [waiting, setWaiting] = useState<waitingForTheElement>({
     images: false
   })
+  let [obstacleGlobal, setObstacleGlobal] = useState({
+    time: 26,
+    setTime: () => {},
+    speedLimit: 45,
+    setSpeedLimit: () => {},
+    speedMove: 9,
+    setSpeedMove: () => {},
+    createLimit: 3,
+    setCreateLimit: () => {}
+  })
 
   return (
     <DeviceSize.Provider value={{ size: deviceSize, setSize: setDeviceSize }}>
@@ -45,7 +56,9 @@ function Game() {
                     <CreateObstacle.Provider value={{ item: obstacle, setItem: setObstacle }}>
                       <CreatePermision.Provider value={{ create: permision, setCreate: setPermision }}>
                         <CreateRecord.Provider value={{value:record,setValue:setRecord}}>
-                          <RouterProvider router={router} />
+                          <CreateObstacleGlobal.Provider value={{createLimit: obstacleGlobal.createLimit, setCreateLimit: obstacleGlobal.setCreateLimit, time: obstacleGlobal.time, setSpeedLimit: obstacleGlobal.setSpeedLimit, setSpeedMove: obstacleGlobal.setSpeedMove, setTime: obstacleGlobal.setTime, speedLimit: obstacleGlobal.speedLimit, speedMove: obstacleGlobal.speedMove}}>
+                            <RouterProvider router={router} />
+                          </CreateObstacleGlobal.Provider>
                         </CreateRecord.Provider>
                       </CreatePermision.Provider>
                     </CreateObstacle.Provider>
