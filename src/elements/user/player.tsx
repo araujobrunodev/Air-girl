@@ -18,7 +18,6 @@ const Player = () => {
 	let obstacle = useObstacle()
 	let size = useDeviceSize().size
 	let defaultPosition = topAddition({ to: "player", size: size })
-	let [RP, setRP] = useState(<></>)
 	let [repeat, setRepeat] = useState(0)
 	let [active, setActive] = useState<string>("")
 	let [position, setPosition] = useState(defaultPosition)
@@ -34,18 +33,14 @@ const Player = () => {
 			if (active == "") {
 				setSpriteNumber(5)
 				setRepeat(++repeat)
-				setPosition(defaultPosition + (defaultS * repeat))
+				setPosition(defaultPosition + (defaultS * repeat * 2))
 				if (repeat == 2) setActive(active = "1")
-				return;
-
 			}
 			if (active == "1") {
 				setSpriteNumber(6)
 				setRepeat(--repeat)
 				setPosition(defaultPosition + (defaultS / repeat))
 				if (repeat == 1) setActive("2")
-				return;
-
 			}
 			if (active == "2") {
 				setRepeat(0)
@@ -54,9 +49,8 @@ const Player = () => {
 				setPosition(defaultPosition)
 				press.setEvent(false)
 				setIsJumping(false)
-				return;
 			}
-		}, 43)
+		}, 60)
 
 		return () => clearTimeout(fase1)
 	}
@@ -96,37 +90,28 @@ const Player = () => {
 		})
 	}
 
-	let renderP = () => {
-		setRP(
-			<RenderPlayer
-				sprite={spriteNumber}
-				posY={-position}
-			/>
-		)
-	}
-
 	useEffect(() => {
 		if (score.pits == 0) setSpriteNumber(0)
 
-		const hitbox = setInterval(() => collision(), 25)
-
 		let Main = setTimeout(() => {
-			renderP()
 			if (pause.active) return;
 			runP()
 			jumpP()
 		}, 50)
 
-		return () => {
-			let list = [hitbox,Main]
+		return () => clearTimeout(Main)
+	}, [spriteNumber, pause.active, gameover.active])
 
-			list.map((it) => clearInterval(it))
-		}
-	}, [RP, spriteNumber, pause.active, gameover.active])
+	useEffect(() => {
+		collision()
+	})
 
-	return (<>
-		{RP}
-	</>)
+	return (
+		<RenderPlayer 
+			sprite={spriteNumber}
+			posY={-position}
+		/>
+	)
 }
 
 export default Player
