@@ -38,7 +38,7 @@ function Game() {
     setTime: () => {},
     speedLimit: 45,
     setSpeedLimit: () => {},
-    speedMove: 12,
+    speedMove: 10.1,
     setSpeedMove: () => {},
     createLimit: 3,
     setCreateLimit: () => {}
