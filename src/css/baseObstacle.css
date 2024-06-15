@@ -1,11 +1,11 @@
 #base-obstacle {
-    position: relative;
+    position: absolute;
     display: flex;
-    flex-grow: 1;
     
     flex-direction: row;
 
     overflow: hidden;
 
-    top: 12%;
+    /* top: 12%; */
+    width: 100vw;
 }
