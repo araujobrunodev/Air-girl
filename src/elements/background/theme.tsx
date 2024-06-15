@@ -4,6 +4,7 @@ import { usePause } from "../../globalContext/pause"
 import { FC, ReactElement, useEffect, useState } from "react"
 import CreateTheme from "./createTheme"
 import "../../css/theme.css"
+import { useScore } from "../../globalContext/score"
 
 interface ThemeProps {
 	children: ReactElement
@@ -13,6 +14,7 @@ const Theme: FC<ThemeProps> = ({children}) => {
 	const Time: number = 200
 	let pause = usePause()
 	let childsTheme = useChildsTheme()
+	let [speed, setSpeed] = useState(1)
 	let [canCreate, setCanCreate] = useState<boolean>(true)
 	let [component, setComponent] = useState<any>(childsTheme.childs.map((item) => {
 		return <CreateTheme
@@ -20,6 +22,11 @@ const Theme: FC<ThemeProps> = ({children}) => {
 			space={item.value}
 		/>
 	}))
+	let score = useScore()
+
+	useEffect(() => {
+		if (score.pits % 5 == 0 && speed != 27) setSpeed(++speed)
+	}, [score.pits])
 
 	useEffect(() => {
 		const CreateT = () => {
@@ -40,7 +47,7 @@ const Theme: FC<ThemeProps> = ({children}) => {
 			if (childsTheme.childs.length == 0) return
 
 			childsTheme.childs.forEach((item) => {
-				item.setValue(item.value += 1)
+				item.setValue(item.value += speed)
 
 				if (item.value >= 200) {
 					RemoveT(item.key)

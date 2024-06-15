@@ -25,90 +25,90 @@ const Player = () => {
 	let [spriteNumber, setSpriteNumber] = useState<number>(0)
 	let [isJumping,setIsJumping] = useState<boolean>(false)
 
+	let jumpP = () => {
+		if (!press.event) return;
+
+		setIsJumping(true)
+
+		let fase1 = setTimeout(() => {
+			if (active == "") {
+				setSpriteNumber(5)
+				setRepeat(++repeat)
+				setPosition(defaultPosition + (defaultS * repeat))
+				if (repeat == 2) setActive(active = "1")
+				return;
+
+			}
+			if (active == "1") {
+				setSpriteNumber(6)
+				setRepeat(--repeat)
+				setPosition(defaultPosition + (defaultS / repeat))
+				if (repeat == 1) setActive("2")
+				return;
+
+			}
+			if (active == "2") {
+				setRepeat(0)
+				setActive("")
+				setSpriteNumber(1)
+				setPosition(defaultPosition)
+				press.setEvent(false)
+				setIsJumping(false)
+				return;
+			}
+		}, 43)
+
+		return () => clearTimeout(fase1)
+	}
+
+	let runP = () => {
+		if (press.event) return;
+
+		let fase = setTimeout(() => {
+			if (spriteNumber === 0 || spriteNumber == 2) return setSpriteNumber(1)
+			if (spriteNumber === 1) return setSpriteNumber(2)
+		}, 45)
+
+		return () => clearTimeout(fase)
+	}
+
+	let fallenP = () => {
+		if (spriteNumber == 6) return;
+		pause.setActive(true)
+		setSpriteNumber(3)
+	}
+
+	let collision = () => {
+		if (obstacle.item.length == 0) return
+
+		obstacle.item.map((obst) => {
+			let distance = getDistance({
+				obstacle: obst,
+				playerX: 13
+			})
+
+			if (distance >= -27 &&
+				distance <= 30&& 
+				!isJumping) {
+				fallenP()
+				gameover.setActive(true)
+			}
+		})
+	}
+
+	let renderP = () => {
+		setRP(
+			<RenderPlayer
+				sprite={spriteNumber}
+				posY={-position}
+			/>
+		)
+	}
+
 	useEffect(() => {
 		if (score.pits == 0) setSpriteNumber(0)
 
-		let jumpP = () => {
-			if (!press.event) return;
-
-			setIsJumping(true)
-
-			let fase1 = setTimeout(() => {
-				if (active == "") {
-					setSpriteNumber(5)
-					setRepeat(++repeat)
-					setPosition(defaultPosition + (defaultS * repeat))
-					if (repeat == 2) setActive(active = "1")
-					return;
-
-				}
-				if (active == "1") {
-					setSpriteNumber(6)
-					setRepeat(--repeat)
-					setPosition(defaultPosition + (defaultS / repeat))
-					if (repeat == 1) setActive("2")
-					return;
-
-				}
-				if (active == "2") {
-					setRepeat(0)
-					setActive("")
-					setSpriteNumber(1)
-					setPosition(defaultPosition)
-					press.setEvent(false)
-					setIsJumping(false)
-					return;
-				}
-			}, 43)
-
-			return () => clearTimeout(fase1)
-		}
-
-		let runP = () => {
-			if (press.event) return;
-
-			let fase = setTimeout(() => {
-				if (spriteNumber === 0 || spriteNumber == 2) return setSpriteNumber(1)
-				if (spriteNumber === 1) return setSpriteNumber(2)
-			}, 45)
-
-			return () => clearTimeout(fase)
-		}
-
-		let fallenP = () => {
-			if (spriteNumber == 6) return;
-			pause.setActive(true)
-			setSpriteNumber(3)
-		}
-
-		let collision = () => {
-			if (obstacle.item.length == 0) return
-
-			obstacle.item.map((obst) => {
-				let distance = getDistance({
-					obstacle: obst,
-					playerX: 13
-				})
-
-				if (distance >= -27 &&
-					distance <= 30&& 
-					!isJumping) {
-					fallenP()
-					gameover.setActive(true)
-				}
-			})
-		}
-
 		const hitbox = setInterval(() => collision(), 25)
-
-		let renderP = () => {
-			setRP(
-				<RenderPlayer
-					sprite={spriteNumber}
-					posY={-position}
-				/>
-			)
-		}
 
 		let Main = setTimeout(() => {
 			renderP()
