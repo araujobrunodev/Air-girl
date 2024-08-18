@@ -16,37 +16,37 @@ import { useLoading } from "../../globalContext/loading"
 const images = [car, rock, trafficCone, fallen1, fallen2, jump1, jump2, run1, run2, stop, theme, unpause]
 
 const LoadImages = () => {
+    const limit = images.length
     let [count,setCount] = useState(0)
-    let [Load,setLoad] = useState(true)
     let loading = useLoading()
-    let limit = images.length - 1
+
+    const loadImg = async () => {
+        console.log(images[count])    
+        
+        setTimeout(() => {
+            setCount(++count)
+        }, 1000 * 1)
+    }
 
     useEffect(() => {
         if (count == limit && !loading.waiting.images) {
+            console.log("all imagens was loaded")
             loading.setWaiting({
                 ...loading.waiting,
                 images: true
             })
         }
-        
-        if (count == limit) return;
-        
-        images.map((img) => {
-            if (Load == false ) {
-                console.log("imagem carregada:",img)
-                setCount(count++)
-                setLoad(true)
-            } 
-        })
     })
 
     return (
         <img
             src={images[count]}
-            id="loadImages"
-            onLoad={() => setLoad(false)}
-            onError={() => setLoad(true)}
-            hidden={true}
+            id="iconWait"
+            onLoad={() => {
+                if (count != limit) loadImg()
+            }}
+            onError={() => console.log("cant find:",images[count])}
+            hidden={false}
         />
     )
 }
