@@ -12,19 +12,16 @@ const findObstacleProperty = ({name}:ObstacleProperty) => {
     switch (name) {
         case "car":
             result.width = 66
-            result.height = 55
             result.name = car
             break
 
         case "rock":
             result.width = 70
-            result.height = 60
             result.name = rock
             break
 
         case "traffic cone":
-            result.width = 48
-            result.height = 53
+            result.width = 55
             result.name = trafficCone
             break
     }

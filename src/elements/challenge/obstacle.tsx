@@ -55,8 +55,6 @@ const Obstacle = () => {
 	}
 
 	const move = () => {
-		if (obstacle.item.length == 0) return
-
 		obstacle.item.map((obj) => {
 			obj.setMove(obj.move -= obj.speed)
 
@@ -91,19 +89,19 @@ const Obstacle = () => {
 		if (pause.active) return
 
 		const obstacleManager = setInterval(() => {
-			create()
-			move()
 			render()
+			move()
 			breakLimit()
+			create()
 		}, obstacleGlobal.time)
 
 		return () => clearInterval(obstacleManager)
-	}, [obstacle, pause.active,obstacleGlobal.createLimit,obstacleGlobal.speedLimit])
+	}, [obstacle, pause.active])
 
 	return (
 		<div id="base-obstacle">
 			{
-				obstacle.item.length != 0 && Render
+				Render
 			}
 		</div>
 	)
