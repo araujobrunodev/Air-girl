@@ -9,9 +9,13 @@ interface TopAddition {
 }
 
 const topAddition = ({ to, size }: TopAddition): number => {
+    const width = window.innerWidth
     let result: number = 0
 
-    result = 6
+    if (width >= 1100) 
+        result = 3
+    else 
+        result = 6
 
     return result
 }

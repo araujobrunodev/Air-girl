@@ -10,7 +10,7 @@ import RenderPlayer from "./render"
 import topAddition from "../topAdd"
 
 const Player = () => {
-	const defaultS: number = 25
+	const defaultS: number = window.innerWidth >= 1100 ? 7.6 : 25 
 	let pause = usePause()
 	let press = usePress()
 	let score = useScore()
